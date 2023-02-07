@@ -198,3 +198,5 @@ Method                    | Description                                         
 
 - [Plugin File Validate Size](/docs/pluginfilevalidatesize.md)
 - [Plugin File Validate Type](/docs/pluginfilevalidatetype.md)
+- [Plugin Image Crop](/docs/pluginimagecrop.md)
+- [Plugin Image Exif Orientation](/docs/pluginimageexiforientation.md)
