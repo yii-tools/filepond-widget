@@ -7,10 +7,6 @@ namespace Yii\FilePond;
 use Yii\Html\Helper\Utils;
 use Yii\Widget\Attribute;
 use Yii\Widget\Input\AbstractInputWidget;
-use Yiisoft\Definitions\Exception\CircularReferenceException;
-use Yiisoft\Definitions\Exception\InvalidConfigException;
-use Yiisoft\Definitions\Exception\NotInstantiableException;
-use Yiisoft\Factory\NotFoundException;
 
 use function array_key_exists;
 use function is_string;

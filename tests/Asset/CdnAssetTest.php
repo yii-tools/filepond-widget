@@ -6,7 +6,6 @@ namespace Yii\FilePond\Tests\Asset;
 
 use PHPUnit\Framework\TestCase;
 use Yii\FilePond\Tests\Support\TestTrait;
-use Yiisoft\Assets\AssetBundle;
 
 final class CdnAssetTest extends TestCase
 {
