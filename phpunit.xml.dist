@@ -23,7 +23,7 @@
   </coverage>
 
   <testsuites>
-    <testsuite name="Template">
+    <testsuite name="FilePond-Widget">
       <directory>./tests</directory>
     </testsuite>
   </testsuites>
