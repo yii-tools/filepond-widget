@@ -5,7 +5,7 @@ The File Size Validation plugin handles blocking of files that are too large.
 ### methods of the plugin
 
 Method                            | Parameter |Description                                                             | Default
-----------------------------------|-----------|-==========-------------------------------------------------------------|---------
+----------------------------------|-----------|------------------------------------------------------------------------|---------
 `allowFileSizeValidation()`       | `bool`    | Return new instance with enable or disable file size validation.       | `true`
 `labelMaxFileSize()`              | `string`  | Return new instance with a new label for max files size.               | `'Maximum file size is {filesize}'`
 `labelMaxFileSizeExceeded()`      | `string`  | Return new instance with a new label for max files size exceeded.      | `'Maximum file size exceeded'`
