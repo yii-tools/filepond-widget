@@ -200,3 +200,6 @@ Method                    | Description                                         
 - [Plugin File Validate Type](/docs/pluginfilevalidatetype.md)
 - [Plugin Image Crop](/docs/pluginimagecrop.md)
 - [Plugin Image Exif Orientation](/docs/pluginimageexiforientation.md)
+- [Plugin Image Preview](/docs/pluginimagepreview.md)
+- [Plugin Image Transform](/docs/pluginimagetransform.md)
+- [Plugin PDF Preview](/docs/pluginpdfpreview.md)

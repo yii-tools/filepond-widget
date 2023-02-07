@@ -84,7 +84,7 @@ trait HasPluginImagePreview
      * createImageBitmap is not supported. By default no maximum file size is defined, expects a string, like `2MB`
      * or `500KB`.
      *
-     * @param string $value The image preview max file size. Default: 256.
+     * @param string $value The image preview max file size. Default: `null`.
      */
     public function imagePreviewMaxFileSize(string $value): self
     {
@@ -125,7 +125,7 @@ trait HasPluginImagePreview
     /**
      * Return new instance with a new image preview min height.
      *
-     * @param int $value The image preview height. Default: 44.
+     * @param int $value The image preview height. Default: `44`.
      */
     public function imagePreviewMinHeight(int $value): self
     {

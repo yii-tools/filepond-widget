@@ -38,7 +38,7 @@ trait HasPluginPdfPreview
     /**
      * Return new instance with pdf component extra params.
      *
-     * @param string $value Pdf component extra params. Default: `toolbar=0&view=fit&page=1`.
+     * @param string $value Pdf component extra params. Default: `'toolbar=0&view=fit&page=1'`.
      */
     public function pdfComponentExtraParams(string $value): self
     {

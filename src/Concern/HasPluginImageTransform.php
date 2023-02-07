@@ -25,6 +25,8 @@ trait HasPluginImageTransform
     /**
      * Return new instance with image transform after create blob. A hook to make changes to the file after the file has
      * been created.
+     *
+     * @param array $value Image transform after create blob. Default: `null`.
      */
     public function imageTransformAfterCreateBlob(array $value): self
     {

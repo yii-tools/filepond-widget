@@ -6,6 +6,6 @@ The Image preview plugin uses this information to show the correct preview. The 
 
 ### methods of the plugin
 
-Method                           | Description                                                                 | Default
----------------------------------|-----------------------------------------------------------------------------|---------
-`allowImageExifOrientation()`    | Return new instance with enable or disable image exif orientation.          | `true`
+Method                        | Parameter | Description                                                        | Default
+------------------------------|-----------|--------------------------------------------------------------------|---------
+`allowImageExifOrientation()` | `bool`    | Return new instance with enable or disable image exif orientation. | `true`

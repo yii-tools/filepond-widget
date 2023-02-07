@@ -6,7 +6,7 @@ The Image preview plugin uses this information to show the correct preview. The 
 
 ### methods of the plugin
 
-Method                   | Description                                                                                                   | Default
--------------------------|---------------------------------------------------------------------------------------------------------------|---------
-`allowImageCrop()`       | Return new instance with enable or disable image crop.                                                        | `true`
-`imageCropAspectRatio()` | Return new instance with the aspect ratio of the crop in human readable format, for example '1:1' or '16:10'. | `null`
+Method                   | Parameter | Description                                                                                                   | Default
+-------------------------|-----------|---------------------------------------------------------------------------------------------------------------|---------
+`allowImageCrop()`       | `bool`    | Return new instance with enable or disable image crop.                                                        | `true`
+`imageCropAspectRatio()` | `string`  | Return new instance with the aspect ratio of the crop in human readable format, for example '1:1' or '16:10'. | `null`
