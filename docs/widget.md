@@ -197,3 +197,4 @@ Method                    | Description                                         
 ```
 
 - [Plugin File Validate Size](/docs/pluginfilevalidatesize.md)
+- [Plugin File Validate Type](/docs/pluginfilevalidatetype.md)
