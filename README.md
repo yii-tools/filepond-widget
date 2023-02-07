@@ -5,8 +5,8 @@
     <a href="https://pqina.nl/filepond/" target="_blank">
         <img src="https://raw.githubusercontent.com/pqina/filepond-github-assets/master/logo.svg" height="100px">
     </a>    
-    <h1 align="center">Template.</h1>
-    <br>
+    <h1 align="center">FilePond widget for YiiFramework v. 3.0.</h1>
+    <br>    
 </p>
 
 ## Requirements
