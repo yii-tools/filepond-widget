@@ -42,7 +42,7 @@ trait HasPluginFileValidateType
      * Return new instance specifies function that receives a file and the type detected by FilePond, should return a
      * Promise, resolve with detected file type, reject if can't detect.
      *
-     * @param string $value Specifies function that receives a file and the type detected by FilePond.
+     * @param string $value Specifies function that receives a file and the type detected by FilePond. Default: `null`.
      *
      * Code example:
      * ```JS

@@ -195,3 +195,5 @@ Method                    | Description                                         
     'FilePondPluginImagePreview',
 ]
 ```
+
+- [Plugin File Validate Size](/docs/pluginfilevalidatesize.md)
