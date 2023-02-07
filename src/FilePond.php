@@ -328,7 +328,7 @@ final class FilePond extends AbstractComponentWidget
         $depends = [];
 
         foreach ($this->pluginDefault as $plugin) {
-            $assetBundle =  str_replace('FilePond', '', $plugin);
+            $assetBundle = str_replace('FilePond', '', $plugin);
             $depends[] = 'Yii\FilePond\Asset' . '\\' . $assetBundle . $this->environmentAsset . 'Asset';
         }
 
