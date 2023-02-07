@@ -239,7 +239,7 @@ final class FilePond extends AbstractComponentWidget
     /**
      * Return new instance wheather is required or not.
      *
-     * @param bool $value Wheather is required or not. Default: `true`.
+     * @param bool $value Wheather is required or not. Default: `false`.
      */
     public function required(): static
     {
