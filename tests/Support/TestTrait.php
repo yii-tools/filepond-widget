@@ -83,8 +83,6 @@ trait TestTrait
         $translator = new Translator('en');
 
         $translator->addCategorySources($this->createConfigCategorySource());
-        $translator = $translator->withDefaultCategory('filepond');
-
-        return $translator;
+        return $translator->withDefaultCategory('filepond');
     }
 }
