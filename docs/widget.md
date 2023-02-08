@@ -1,6 +1,10 @@
 ## Usage widget
 
-The widget is a wrapper for the [filepond](https://pqina.nl/filepond/), which allows you to upload files to the server. The assets are registered in the view automatically when the widget is used.
+The widget is a wrapper for the [filepond](https://pqina.nl/filepond/), which allows you to upload files to the server. 
+
+The assets are registered in the view automatically when the widget is used.
+
+The widget translation is done automatically if you use ['locale'](https://github.com/yiisoft/yii-middleware/blob/master/src/Locale.php) middleware, otherwise you need to setter locale in the widget `FilePond::widget([$form, 'attachment'])->locale('en')`.
 
 ### Example of usage simple in the view
 

@@ -12,6 +12,9 @@ use Yiisoft\Assets\AssetPublisher;
 use Yiisoft\Definitions\Exception\InvalidConfigException;
 use Yiisoft\Test\Support\Container\SimpleContainer;
 use Yiisoft\Test\Support\EventDispatcher\SimpleEventDispatcher;
+use Yiisoft\Translator\CategorySource;
+use Yiisoft\Translator\IntlMessageFormatter;
+use Yiisoft\Translator\Message\Php\MessageSource;
 use Yiisoft\Translator\Translator;
 use Yiisoft\Translator\TranslatorInterface;
 use Yiisoft\View\WebView;
@@ -37,6 +40,7 @@ trait TestTrait
                 '@npm' => '@root/node_modules',
                 '@assetsUrl' => '/',
                 '@assets' => __DIR__ . '/runtime',
+                '@filepond' => '@root',
             ],
         );
         $this->assetManager = new AssetManager($this->aliases, new AssetLoader($this->aliases, false, []));
@@ -47,7 +51,7 @@ trait TestTrait
         $container = new SimpleContainer(
             [
                 AssetManager::class => $this->assetManager,
-                TranslatorInterface::class => new Translator('en'),
+                TranslatorInterface::class => $this->createTranslator(),
                 WebView::class => $this->webView,
             ],
         );
@@ -60,5 +64,27 @@ trait TestTrait
         parent::tearDown();
 
         Assert::removeFilesFromDirectory($this->aliases->get('@assets'));
+    }
+
+    private function createConfigCategorySource(): CategorySource
+    {
+        $aliases = $this->aliases;
+        $params = require $aliases->get('@root/config/params.php');
+
+        return new CategorySource(
+            $params['yii-tools/filepond-widget']['translator']['defaultCategory'],
+            new MessageSource($aliases->get($params['yii-tools/filepond-widget']['translator']['path'])),
+            new IntlMessageFormatter(),
+        );
+    }
+
+    private function createTranslator(): TranslatorInterface
+    {
+        $translator = new Translator('en');
+
+        $translator->addCategorySources($this->createConfigCategorySource());
+        $translator = $translator->withDefaultCategory('filepond');
+
+        return $translator;
     }
 }
