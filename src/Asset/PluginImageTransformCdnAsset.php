@@ -7,7 +7,7 @@ namespace Yii\FilePond\Asset;
 use Yiisoft\Assets\AssetBundle;
 
 /**
- * Asset bundle for the Filepond plugin image transform.
+ * Content delivery network asset bundle for the Filepond plugin image transform.
  */
 final class PluginImageTransformCdnAsset extends AssetBundle
 {

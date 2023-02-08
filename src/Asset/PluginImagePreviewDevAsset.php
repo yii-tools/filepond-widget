@@ -8,7 +8,7 @@ use Yiisoft\Assets\AssetBundle;
 use Yiisoft\Files\PathMatcher\PathMatcher;
 
 /**
- * Asset bundle for the Filepond plugin image preview.
+ * Development asset bundle for the Filepond plugin image preview.
  */
 final class PluginImagePreviewDevAsset extends AssetBundle
 {

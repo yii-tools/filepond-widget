@@ -7,7 +7,7 @@ namespace Yii\FilePond\Asset;
 use Yiisoft\Assets\AssetBundle;
 
 /**
- * Asset bundle for the Filepond file upload widget.
+ * Content delivery network asset bundle for the Filepond file upload widget.
  */
 final class FilePondCdnAsset extends AssetBundle
 {

@@ -8,7 +8,7 @@ use Yiisoft\Assets\AssetBundle;
 use Yiisoft\Files\PathMatcher\PathMatcher;
 
 /**
- * Asset bundle for the Filepond plugin image exif orientation.
+ * Production asset bundle for the Filepond plugin image exif orientation.
  */
 final class PluginImageExifOrientationProdAsset extends AssetBundle
 {
