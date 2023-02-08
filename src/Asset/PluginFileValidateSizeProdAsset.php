@@ -8,7 +8,7 @@ use Yiisoft\Assets\AssetBundle;
 use Yiisoft\Files\PathMatcher\PathMatcher;
 
 /**
- * Asset bundle for the Filepond plugin file validate size.
+ * Production asset bundle for the Filepond plugin file validate size.
  */
 final class PluginFileValidateSizeProdAsset extends AssetBundle
 {

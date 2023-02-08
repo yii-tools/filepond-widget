@@ -17,7 +17,7 @@
 
 The minimun version of PHP required by this package is PHP 8.1.
 
-For install this package, you need [composer](https://getcomposer.org/) and [npm](https://www.npmjs.com/).
+For install this package, you need [composer](https://getcomposer.org/), [npm](https://www.npmjs.com/), and [intl extension](https://www.php.net/manual/en/book.intl.php) for PHP.
 
 ## Install
 

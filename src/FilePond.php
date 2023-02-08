@@ -28,6 +28,7 @@ final class FilePond extends AbstractComponentWidget
     use Concern\HasPluginPdfPreview;
 
     private string $environmentAsset = 'Prod';
+    private string $locale = '';
     private array $options = [];
     /** @psalm-var string[] */
     private array $plugingAssets = [
@@ -193,6 +194,19 @@ final class FilePond extends AbstractComponentWidget
     }
 
     /**
+     * Return new instance with the locale lenguage of FilePond.
+     *
+     * @param string $value The locale lenguage of FilePond. Default: ``.
+     */
+    public function locale(string $value): self
+    {
+        $new = clone $this;
+        $new->locale = $value;
+
+        return $new;
+    }
+
+    /**
      * Return new instance with set config options for FilePond.
      *
      * @param array $value The config options for FilePond. Default: `[]`.
@@ -268,10 +282,15 @@ final class FilePond extends AbstractComponentWidget
     private function buildTranslation(): array
     {
         $translation = [];
+        $translator = $this->translator;
+
+        if ($this->locale !== '') {
+            $translator = $translator->withLocale($this->locale);
+        }
 
         foreach ($this->translationTagDefault as $tag) {
             if (array_key_exists($tag, $this->options) === false) {
-                $translation[$tag] = $this->translator->translate($tag, [], $this->translationCategory);
+                $translation[$tag] = $translator->translate($tag, [], $this->translationCategory);
             }
         }
 

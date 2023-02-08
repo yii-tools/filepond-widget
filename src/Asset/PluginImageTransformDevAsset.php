@@ -8,7 +8,7 @@ use Yiisoft\Assets\AssetBundle;
 use Yiisoft\Files\PathMatcher\PathMatcher;
 
 /**
- * Asset bundle for the Filepond plugin image transform.
+ * Development asset bundle for the Filepond plugin image transform.
  */
 final class PluginImageTransformDevAsset extends AssetBundle
 {

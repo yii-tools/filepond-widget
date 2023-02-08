@@ -7,7 +7,7 @@ namespace Yii\FilePond\Asset;
 use Yiisoft\Assets\AssetBundle;
 
 /**
- * Asset bundle for the Filepond plugin image preview.
+ * Content delivery network asset bundle for the Filepond plugin image preview.
  */
 final class PluginImageCropCdnAsset extends AssetBundle
 {

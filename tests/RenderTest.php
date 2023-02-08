@@ -152,6 +152,22 @@ final class RenderTest extends TestCase
      * @throws InvalidConfigException
      * @throws NotFoundException
      * @throws NotInstantiableException
+     */
+    public function testLocale(): void
+    {
+        FilePond::widget([new TestForm(), 'string'])->locale('es')->render();
+
+        $this->assertStringContainsString(
+            '"labelIdle":"Arrastra y suelta tus archivos o <span class = \"filepond--label-action\"> Examinar <span>"',
+            $this->getScript(),
+        );
+    }
+
+    /**
+     * @throws CircularReferenceException
+     * @throws InvalidConfigException
+     * @throws NotFoundException
+     * @throws NotInstantiableException
      * @throws \Yiisoft\Assets\Exception\InvalidConfigException
      */
     public function testMaxFiles(): void

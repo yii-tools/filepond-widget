@@ -7,7 +7,7 @@ namespace Yii\FilePond\Asset;
 use Yiisoft\Assets\AssetBundle;
 
 /**
- * Asset bundle for the Filepond plugin image exif orientation.
+ * Content delivery network asset bundle for the Filepond plugin image exif orientation.
  */
 final class PluginImageExifOrientationCdnAsset extends AssetBundle
 {

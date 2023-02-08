@@ -8,7 +8,7 @@ use Yiisoft\Assets\AssetBundle;
 use Yiisoft\Files\PathMatcher\PathMatcher;
 
 /**
- * Asset bundle for the Filepond file upload widget.
+ * Production asset bundle for the Filepond file upload widget.
  */
 final class FilePondProdAsset extends AssetBundle
 {
