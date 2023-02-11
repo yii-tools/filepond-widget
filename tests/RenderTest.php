@@ -76,7 +76,6 @@ final class RenderTest extends TestCase
         $this->assertStringContainsString('FilePondPluginImageTransform', $this->getScript());
     }
 
-
     /**
      * @throws CircularReferenceException
      * @throws InvalidConfigException
