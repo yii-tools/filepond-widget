@@ -125,6 +125,17 @@ final class FilePond extends AbstractComponentWidget
     }
 
     /**
+     * Return new instance wheather enable or disable plugin image transform.
+     */
+    public function canBePluginImageTransform(): self
+    {
+        $new = clone $this;
+        $new->pluginDefault[] = 'FilePondPluginImageTransform';
+
+        return $new;
+    }
+
+    /**
      * Return new instance wheather enable or disable plugin PDF preview.
      */
     public function canBePluginPdfPreview(): self

@@ -102,6 +102,7 @@ final class RenderTest extends TestCase
     {
         FilePond::widget([new TestForm(), 'string'])
             ->canBePluginImageCrop()
+            ->canBePluginImageTransform()
             ->canBePluginPdfPreview()
             ->environmentAsset('Cdn')
             ->render();
@@ -113,6 +114,7 @@ final class RenderTest extends TestCase
         $this->assertTrue($this->assetManager->isRegisteredBundle(Asset\PluginImageExifOrientationCdnAsset::class));
         $this->assertTrue($this->assetManager->isRegisteredBundle(Asset\PluginImagePreviewCdnAsset::class));
         $this->assertTrue($this->assetManager->isRegisteredBundle(Asset\PluginImageCropCdnAsset::class));
+        $this->assertTrue($this->assetManager->isRegisteredBundle(Asset\PluginImageTransformCdnAsset::class));
         $this->assertTrue($this->assetManager->isRegisteredBundle(Asset\PluginPdfPreviewCdnAsset::class));
     }
 
@@ -128,6 +130,7 @@ final class RenderTest extends TestCase
     {
         FilePond::widget([new TestForm(), 'string'])
             ->canBePluginImageCrop()
+            ->canBePluginImageTransform()
             ->canBePluginPdfPreview()
             ->environmentAsset('Dev')
             ->render();
@@ -139,6 +142,7 @@ final class RenderTest extends TestCase
         $this->assertTrue($this->assetManager->isRegisteredBundle(Asset\PluginImageExifOrientationDevAsset::class));
         $this->assertTrue($this->assetManager->isRegisteredBundle(Asset\PluginImagePreviewDevAsset::class));
         $this->assertTrue($this->assetManager->isRegisteredBundle(Asset\PluginImageCropDevAsset::class));
+        $this->assertTrue($this->assetManager->isRegisteredBundle(Asset\PluginImageTransformDevAsset::class));
         $this->assertTrue($this->assetManager->isRegisteredBundle(Asset\PluginPdfPreviewDevAsset::class));
     }
 
@@ -254,7 +258,11 @@ final class RenderTest extends TestCase
     {
         $this->assertSame(
             '<input class="filepond" id="testform-string" name="TestForm[string][]" type="file">',
-            FilePond::widget([new TestForm(), 'string'])->canBePluginImageCrop()->canBePluginPdfPreview()->render(),
+            FilePond::widget([new TestForm(), 'string'])
+                ->canBePluginImageCrop()
+                ->canBePluginImageTransform()
+                ->canBePluginPdfPreview()
+                ->render(),
         );
         $this->assertTrue($this->assetManager->isRegisteredBundle(Asset\FilePondProdAsset::class));
         $this->assertTrue($this->assetManager->isRegisteredBundle(Asset\PluginFileEncodeProdAsset::class));
@@ -263,6 +271,7 @@ final class RenderTest extends TestCase
         $this->assertTrue($this->assetManager->isRegisteredBundle(Asset\PluginImageExifOrientationProdAsset::class));
         $this->assertTrue($this->assetManager->isRegisteredBundle(Asset\PluginImagePreviewProdAsset::class));
         $this->assertTrue($this->assetManager->isRegisteredBundle(Asset\PluginImageCropProdAsset::class));
+        $this->assertTrue($this->assetManager->isRegisteredBundle(Asset\PluginImageTransformProdAsset::class));
         $this->assertTrue($this->assetManager->isRegisteredBundle(Asset\PluginPdfPreviewProdAsset::class));
     }
 
