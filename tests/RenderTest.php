@@ -259,8 +259,10 @@ final class RenderTest extends TestCase
      */
     public function testRequired(): void
     {
-        FilePond::widget([new TestForm(), 'string'])->required()->render();
-
+        $this->assertSame(
+            '<input class="filepond" id="testform-string" name="TestForm[string][]" type="file" required>',
+            FilePond::widget([new TestForm(), 'string'])->required()->render(),
+        );
         $this->assertStringContainsString('"required":true', $this->getScript());
     }
 
