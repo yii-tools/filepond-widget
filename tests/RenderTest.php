@@ -100,7 +100,11 @@ final class RenderTest extends TestCase
      */
     public function testEnvironmentAssetWithCdn(): void
     {
-        FilePond::widget([new TestForm(), 'string'])->environmentAsset('Cdn')->render();
+        FilePond::widget([new TestForm(), 'string'])
+            ->canBePluginImageCrop()
+            ->canBePluginPdfPreview()
+            ->environmentAsset('Cdn')
+            ->render();
 
         $this->assertTrue($this->assetManager->isRegisteredBundle(Asset\FilePondCdnAsset::class));
         $this->assertTrue($this->assetManager->isRegisteredBundle(Asset\PluginFileEncodeCdnAsset::class));
@@ -108,6 +112,8 @@ final class RenderTest extends TestCase
         $this->assertTrue($this->assetManager->isRegisteredBundle(Asset\PluginFileValidateTypeCdnAsset::class));
         $this->assertTrue($this->assetManager->isRegisteredBundle(Asset\PluginImageExifOrientationCdnAsset::class));
         $this->assertTrue($this->assetManager->isRegisteredBundle(Asset\PluginImagePreviewCdnAsset::class));
+        $this->assertTrue($this->assetManager->isRegisteredBundle(Asset\PluginImageCropCdnAsset::class));
+        $this->assertTrue($this->assetManager->isRegisteredBundle(Asset\PluginPdfPreviewCdnAsset::class));
     }
 
     /**
@@ -120,7 +126,11 @@ final class RenderTest extends TestCase
      */
     public function testEnvironmentAssetWithDev(): void
     {
-        FilePond::widget([new TestForm(), 'string'])->environmentAsset('Dev')->render();
+        FilePond::widget([new TestForm(), 'string'])
+            ->canBePluginImageCrop()
+            ->canBePluginPdfPreview()
+            ->environmentAsset('Dev')
+            ->render();
 
         $this->assertTrue($this->assetManager->isRegisteredBundle(Asset\FilePondDevAsset::class));
         $this->assertTrue($this->assetManager->isRegisteredBundle(Asset\PluginFileEncodeDevAsset::class));
@@ -128,6 +138,8 @@ final class RenderTest extends TestCase
         $this->assertTrue($this->assetManager->isRegisteredBundle(Asset\PluginFileValidateTypeDevAsset::class));
         $this->assertTrue($this->assetManager->isRegisteredBundle(Asset\PluginImageExifOrientationDevAsset::class));
         $this->assertTrue($this->assetManager->isRegisteredBundle(Asset\PluginImagePreviewDevAsset::class));
+        $this->assertTrue($this->assetManager->isRegisteredBundle(Asset\PluginImageCropDevAsset::class));
+        $this->assertTrue($this->assetManager->isRegisteredBundle(Asset\PluginPdfPreviewDevAsset::class));
     }
 
     /**
@@ -250,6 +262,8 @@ final class RenderTest extends TestCase
         $this->assertTrue($this->assetManager->isRegisteredBundle(Asset\PluginFileValidateTypeProdAsset::class));
         $this->assertTrue($this->assetManager->isRegisteredBundle(Asset\PluginImageExifOrientationProdAsset::class));
         $this->assertTrue($this->assetManager->isRegisteredBundle(Asset\PluginImagePreviewProdAsset::class));
+        $this->assertTrue($this->assetManager->isRegisteredBundle(Asset\PluginImageCropProdAsset::class));
+        $this->assertTrue($this->assetManager->isRegisteredBundle(Asset\PluginPdfPreviewProdAsset::class));
     }
 
     /**
