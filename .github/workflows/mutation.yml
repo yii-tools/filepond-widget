@@ -21,7 +21,7 @@ name: mutation test
 
 jobs:
   mutation:
-    uses: yii-tools/actions/.github/workflows/roave-infection.yml@master
+    uses: yii-tools/actions/.github/workflows/roave-infection.yml@main
     with:
       os: >-
         ['ubuntu-latest']
