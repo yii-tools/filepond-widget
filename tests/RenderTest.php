@@ -31,8 +31,10 @@ final class RenderTest extends TestCase
      */
     public function testAllowMultiple(): void
     {
-        FilePond::widget([new TestForm(), 'string'])->allowMultiple(true)->render();
-
+        $this->assertSame(
+            '<input class="filepond" id="testform-string" name="TestForm[string][]" type="file" multiple>',
+            FilePond::widget([new TestForm(), 'string'])->allowMultiple(true)->render(),
+        );
         $this->assertStringContainsString('"allowMultiple":true', $this->getScript());
     }
 
@@ -53,6 +55,25 @@ final class RenderTest extends TestCase
         $this->assertStringContainsString('FilePondPluginImageExifOrientation', $this->getScript());
         $this->assertStringContainsString('FilePondPluginImagePreview', $this->getScript());
         $this->assertStringContainsString('FilePondPluginImageCrop', $this->getScript());
+    }
+
+    /**
+     * @throws CircularReferenceException
+     * @throws InvalidConfigException
+     * @throws NotFoundException
+     * @throws NotInstantiableException
+     * @throws \Yiisoft\Assets\Exception\InvalidConfigException
+     */
+    public function testCanBePluginImageTransform(): void
+    {
+        FilePond::widget([new TestForm(), 'string'])->canBePluginImageTransform()->render();
+
+        $this->assertStringContainsString('FilePondPluginFileEncode', $this->getScript());
+        $this->assertStringContainsString('FilePondPluginFileValidateSize', $this->getScript());
+        $this->assertStringContainsString('FilePondPluginFileValidateType', $this->getScript());
+        $this->assertStringContainsString('FilePondPluginImageExifOrientation', $this->getScript());
+        $this->assertStringContainsString('FilePondPluginImagePreview', $this->getScript());
+        $this->assertStringContainsString('FilePondPluginImageTransform', $this->getScript());
     }
 
     /**
@@ -98,7 +119,12 @@ final class RenderTest extends TestCase
      */
     public function testEnvironmentAssetWithCdn(): void
     {
-        FilePond::widget([new TestForm(), 'string'])->environmentAsset('Cdn')->render();
+        FilePond::widget([new TestForm(), 'string'])
+            ->canBePluginImageCrop()
+            ->canBePluginImageTransform()
+            ->canBePluginPdfPreview()
+            ->environmentAsset('Cdn')
+            ->render();
 
         $this->assertTrue($this->assetManager->isRegisteredBundle(Asset\FilePondCdnAsset::class));
         $this->assertTrue($this->assetManager->isRegisteredBundle(Asset\PluginFileEncodeCdnAsset::class));
@@ -106,6 +132,9 @@ final class RenderTest extends TestCase
         $this->assertTrue($this->assetManager->isRegisteredBundle(Asset\PluginFileValidateTypeCdnAsset::class));
         $this->assertTrue($this->assetManager->isRegisteredBundle(Asset\PluginImageExifOrientationCdnAsset::class));
         $this->assertTrue($this->assetManager->isRegisteredBundle(Asset\PluginImagePreviewCdnAsset::class));
+        $this->assertTrue($this->assetManager->isRegisteredBundle(Asset\PluginImageCropCdnAsset::class));
+        $this->assertTrue($this->assetManager->isRegisteredBundle(Asset\PluginImageTransformCdnAsset::class));
+        $this->assertTrue($this->assetManager->isRegisteredBundle(Asset\PluginPdfPreviewCdnAsset::class));
     }
 
     /**
@@ -118,7 +147,12 @@ final class RenderTest extends TestCase
      */
     public function testEnvironmentAssetWithDev(): void
     {
-        FilePond::widget([new TestForm(), 'string'])->environmentAsset('Dev')->render();
+        FilePond::widget([new TestForm(), 'string'])
+            ->canBePluginImageCrop()
+            ->canBePluginImageTransform()
+            ->canBePluginPdfPreview()
+            ->environmentAsset('Dev')
+            ->render();
 
         $this->assertTrue($this->assetManager->isRegisteredBundle(Asset\FilePondDevAsset::class));
         $this->assertTrue($this->assetManager->isRegisteredBundle(Asset\PluginFileEncodeDevAsset::class));
@@ -126,6 +160,9 @@ final class RenderTest extends TestCase
         $this->assertTrue($this->assetManager->isRegisteredBundle(Asset\PluginFileValidateTypeDevAsset::class));
         $this->assertTrue($this->assetManager->isRegisteredBundle(Asset\PluginImageExifOrientationDevAsset::class));
         $this->assertTrue($this->assetManager->isRegisteredBundle(Asset\PluginImagePreviewDevAsset::class));
+        $this->assertTrue($this->assetManager->isRegisteredBundle(Asset\PluginImageCropDevAsset::class));
+        $this->assertTrue($this->assetManager->isRegisteredBundle(Asset\PluginImageTransformDevAsset::class));
+        $this->assertTrue($this->assetManager->isRegisteredBundle(Asset\PluginPdfPreviewDevAsset::class));
     }
 
     /**
@@ -240,7 +277,11 @@ final class RenderTest extends TestCase
     {
         $this->assertSame(
             '<input class="filepond" id="testform-string" name="TestForm[string][]" type="file">',
-            FilePond::widget([new TestForm(), 'string'])->canBePluginImageCrop()->canBePluginPdfPreview()->render(),
+            FilePond::widget([new TestForm(), 'string'])
+                ->canBePluginImageCrop()
+                ->canBePluginImageTransform()
+                ->canBePluginPdfPreview()
+                ->render(),
         );
         $this->assertTrue($this->assetManager->isRegisteredBundle(Asset\FilePondProdAsset::class));
         $this->assertTrue($this->assetManager->isRegisteredBundle(Asset\PluginFileEncodeProdAsset::class));
@@ -248,6 +289,9 @@ final class RenderTest extends TestCase
         $this->assertTrue($this->assetManager->isRegisteredBundle(Asset\PluginFileValidateTypeProdAsset::class));
         $this->assertTrue($this->assetManager->isRegisteredBundle(Asset\PluginImageExifOrientationProdAsset::class));
         $this->assertTrue($this->assetManager->isRegisteredBundle(Asset\PluginImagePreviewProdAsset::class));
+        $this->assertTrue($this->assetManager->isRegisteredBundle(Asset\PluginImageCropProdAsset::class));
+        $this->assertTrue($this->assetManager->isRegisteredBundle(Asset\PluginImageTransformProdAsset::class));
+        $this->assertTrue($this->assetManager->isRegisteredBundle(Asset\PluginPdfPreviewProdAsset::class));
     }
 
     /**
@@ -259,8 +303,10 @@ final class RenderTest extends TestCase
      */
     public function testRequired(): void
     {
-        FilePond::widget([new TestForm(), 'string'])->required()->render();
-
+        $this->assertSame(
+            '<input class="filepond" id="testform-string" name="TestForm[string][]" type="file" required>',
+            FilePond::widget([new TestForm(), 'string'])->required()->render(),
+        );
         $this->assertStringContainsString('"required":true', $this->getScript());
     }
 

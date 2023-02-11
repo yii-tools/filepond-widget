@@ -14,9 +14,9 @@ final class PluginPdfPreviewProdAsset extends AssetBundle
 {
     public string|null $basePath = '@assets';
     public string|null $baseUrl = '@assetsUrl';
-    public string|null $sourcePath = '@npm/filepond-plugin-pdf-preview';
-    public array $css = ['dist/filepond-plugin-pdf-preview.min.css'];
-    public array $js = ['dist/filepond-plugin-pdf-preview.min.js'];
+    public string|null $sourcePath = '@npm/filepond-plugin-pdf-preview/dist';
+    public array $css = ['filepond-plugin-pdf-preview.min.css'];
+    public array $js = ['filepond-plugin-pdf-preview.min.js'];
 
     public function __construct()
     {
@@ -24,8 +24,8 @@ final class PluginPdfPreviewProdAsset extends AssetBundle
 
         $this->publishOptions = [
             'filter' => $pathMatcher->only(
-                '**dist/filepond-plugin-pdf-preview.min.css',
-                '**dist/filepond-plugin-pdf-preview.min.js',
+                '**filepond-plugin-pdf-preview.min.css',
+                '**filepond-plugin-pdf-preview.min.js',
             ),
         ];
     }

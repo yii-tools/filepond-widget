@@ -14,19 +14,16 @@ final class PluginImagePreviewDevAsset extends AssetBundle
 {
     public string|null $basePath = '@assets';
     public string|null $baseUrl = '@assetsUrl';
-    public string|null $sourcePath = '@npm/filepond-plugin-image-preview';
-    public array $css = ['dist/filepond-plugin-image-preview.css'];
-    public array $js = ['dist/filepond-plugin-image-preview.js'];
+    public string|null $sourcePath = '@npm/filepond-plugin-image-preview/dist';
+    public array $css = ['filepond-plugin-image-preview.css'];
+    public array $js = ['filepond-plugin-image-preview.js'];
 
     public function __construct()
     {
         $pathMatcher = new PathMatcher();
 
         $this->publishOptions = [
-            'filter' => $pathMatcher->only(
-                '**dist/filepond-plugin-image-preview.css',
-                '**dist/filepond-plugin-image-preview.js',
-            ),
+            'filter' => $pathMatcher->only('**filepond-plugin-image-preview.css', '**filepond-plugin-image-preview.js'),
         ];
     }
 }

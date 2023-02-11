@@ -14,17 +14,15 @@ final class PluginFileValidateTypeProdAsset extends AssetBundle
 {
     public string|null $basePath = '@assets';
     public string|null $baseUrl = '@assetsUrl';
-    public string|null $sourcePath = '@npm/filepond-plugin-file-validate-type';
-    public array $js = ['dist/filepond-plugin-file-validate-type.min.js'];
+    public string|null $sourcePath = '@npm/filepond-plugin-file-validate-type/dist';
+    public array $js = ['filepond-plugin-file-validate-type.min.js'];
 
     public function __construct()
     {
         $pathMatcher = new PathMatcher();
 
         $this->publishOptions = [
-            'filter' => $pathMatcher->only(
-                '**dist/filepond-plugin-file-validate-type.min.js',
-            ),
+            'filter' => $pathMatcher->only('**filepond-plugin-file-validate-type.min.js'),
         ];
     }
 }

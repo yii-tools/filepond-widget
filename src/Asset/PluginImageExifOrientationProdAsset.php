@@ -14,17 +14,15 @@ final class PluginImageExifOrientationProdAsset extends AssetBundle
 {
     public string|null $basePath = '@assets';
     public string|null $baseUrl = '@assetsUrl';
-    public string|null $sourcePath = '@npm/filepond-plugin-image-exif-orientation';
-    public array $js = ['dist/filepond-plugin-image-exif-orientation.min.js'];
+    public string|null $sourcePath = '@npm/filepond-plugin-image-exif-orientation/dist';
+    public array $js = ['filepond-plugin-image-exif-orientation.min.js'];
 
     public function __construct()
     {
         $pathMatcher = new PathMatcher();
 
         $this->publishOptions = [
-            'filter' => $pathMatcher->only(
-                '**dist/filepond-plugin-image-exif-orientation.min.js',
-            ),
+            'filter' => $pathMatcher->only('**filepond-plugin-image-exif-orientation.min.js'),
         ];
     }
 }
