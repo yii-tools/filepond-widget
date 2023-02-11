@@ -71,7 +71,9 @@ final class NpmAssetTest extends TestCase
 
             if ($getPublishedUrl !== null && $js !== null) {
                 $bundleUrl = $getPublishedUrl . '/' . $js;
-
+                $this->assertFileExists(
+                    dirname(__DIR__) . '/Support/runtime' . $this->assetManager->getJsFiles()[$bundleUrl][0],
+                );
                 $this->assertSame($bundleUrl, $this->assetManager->getJsFiles()[$bundleUrl][0]);
             }
         }

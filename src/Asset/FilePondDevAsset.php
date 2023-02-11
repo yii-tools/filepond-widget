@@ -14,9 +14,9 @@ final class FilePondDevAsset extends AssetBundle
 {
     public string|null $basePath = '@assets';
     public string|null $baseUrl = '@assetsUrl';
-    public string|null $sourcePath = '@npm/filepond';
-    public array $css = ['dist/filepond.css'];
-    public array $js = ['dist/filepond.js'];
+    public string|null $sourcePath = '@npm/filepond/dist';
+    public array $css = ['filepond.css'];
+    public array $js = ['filepond.js'];
     public array $depends = [
         PluginFileEncodeDevAsset::class,
         PluginFileValidateSizeDevAsset::class,

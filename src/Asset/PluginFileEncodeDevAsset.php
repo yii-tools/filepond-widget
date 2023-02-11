@@ -14,8 +14,8 @@ final class PluginFileEncodeDevAsset extends AssetBundle
 {
     public string|null $basePath = '@assets';
     public string|null $baseUrl = '@assetsUrl';
-    public string|null $sourcePath = '@npm/filepond-plugin-file-encode';
-    public array $js = ['dist/filepond-plugin-file-encode.js'];
+    public string|null $sourcePath = '@npm/filepond-plugin-file-encode/dist';
+    public array $js = ['filepond-plugin-file-encode.js'];
 
     public function __construct()
     {

@@ -14,8 +14,8 @@ final class PluginImageCropDevAsset extends AssetBundle
 {
     public string|null $basePath = '@assets';
     public string|null $baseUrl = '@assetsUrl';
-    public string|null $sourcePath = '@npm/filepond-plugin-image-crop';
-    public array $js = ['dist/filepond-plugin-image-crop.js'];
+    public string|null $sourcePath = '@npm/filepond-plugin-image-crop/dist';
+    public array $js = ['filepond-plugin-image-crop.js'];
 
     public function __construct()
     {

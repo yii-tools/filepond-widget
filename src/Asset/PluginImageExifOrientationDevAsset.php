@@ -14,8 +14,8 @@ final class PluginImageExifOrientationDevAsset extends AssetBundle
 {
     public string|null $basePath = '@assets';
     public string|null $baseUrl = '@assetsUrl';
-    public string|null $sourcePath = '@npm/filepond-plugin-image-exif-orientation';
-    public array $js = ['dist/filepond-plugin-image-exif-orientation.js'];
+    public string|null $sourcePath = '@npm/filepond-plugin-image-exif-orientation/dist';
+    public array $js = ['filepond-plugin-image-exif-orientation.js'];
 
     public function __construct()
     {

@@ -14,9 +14,9 @@ final class FilePondProdAsset extends AssetBundle
 {
     public string|null $basePath = '@assets';
     public string|null $baseUrl = '@assetsUrl';
-    public string|null $sourcePath = '@npm/filepond';
-    public array $css = ['dist/filepond.min.css'];
-    public array $js = ['dist/filepond.min.js'];
+    public string|null $sourcePath = '@npm/filepond/dist';
+    public array $css = ['filepond.min.css'];
+    public array $js = ['filepond.min.js'];
     public array $depends = [
         PluginFileEncodeProdAsset::class,
         PluginFileValidateSizeProdAsset::class,
