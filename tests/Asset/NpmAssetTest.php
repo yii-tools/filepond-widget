@@ -37,6 +37,9 @@ final class NpmAssetTest extends TestCase
             if ($getPublishedUrl !== null && $css !== null) {
                 $bundleUrl = $getPublishedUrl . '/' . $css;
 
+                $this->assertFileExists(
+                    dirname(__DIR__) . '/Support/runtime' . $this->assetManager->getCssFiles()[$bundleUrl][0],
+                );
                 $this->assertSame($bundleUrl, $this->assetManager->getCssFiles()[$bundleUrl][0]);
             }
         }
@@ -49,6 +52,9 @@ final class NpmAssetTest extends TestCase
             if ($getPublishedUrl !== null && $css !== null) {
                 $dependUrl = $getPublishedUrl . '/' . $css;
 
+                $this->assertFileExists(
+                    dirname(__DIR__) . '/Support/runtime' . $this->assetManager->getCssFiles()[$dependUrl][0],
+                );
                 $this->assertSame($dependUrl, $this->assetManager->getCssFiles()[$dependUrl][0]);
             }
         }
