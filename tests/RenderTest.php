@@ -31,8 +31,10 @@ final class RenderTest extends TestCase
      */
     public function testAllowMultiple(): void
     {
-        FilePond::widget([new TestForm(), 'string'])->allowMultiple(true)->render();
-
+        $this->assertSame(
+            '<input class="filepond" id="testform-string" name="TestForm[string][]" type="file" multiple>',
+            FilePond::widget([new TestForm(), 'string'])->allowMultiple(true)->render(),
+        );
         $this->assertStringContainsString('"allowMultiple":true', $this->getScript());
     }
 
