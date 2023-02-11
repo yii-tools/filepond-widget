@@ -64,6 +64,26 @@ final class RenderTest extends TestCase
      * @throws NotInstantiableException
      * @throws \Yiisoft\Assets\Exception\InvalidConfigException
      */
+    public function testCanBePluginImageTransform(): void
+    {
+        FilePond::widget([new TestForm(), 'string'])->canBePluginImageTransform()->render();
+
+        $this->assertStringContainsString('FilePondPluginFileEncode', $this->getScript());
+        $this->assertStringContainsString('FilePondPluginFileValidateSize', $this->getScript());
+        $this->assertStringContainsString('FilePondPluginFileValidateType', $this->getScript());
+        $this->assertStringContainsString('FilePondPluginImageExifOrientation', $this->getScript());
+        $this->assertStringContainsString('FilePondPluginImagePreview', $this->getScript());
+        $this->assertStringContainsString('FilePondPluginImageTransform', $this->getScript());
+    }
+
+
+    /**
+     * @throws CircularReferenceException
+     * @throws InvalidConfigException
+     * @throws NotFoundException
+     * @throws NotInstantiableException
+     * @throws \Yiisoft\Assets\Exception\InvalidConfigException
+     */
     public function testCanBePluginPdfPreview(): void
     {
         FilePond::widget([new TestForm(), 'string'])->canBePluginPdfPreview()->render();
