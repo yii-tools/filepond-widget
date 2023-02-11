@@ -22,9 +22,7 @@ final class PluginFileValidateTypeProdAsset extends AssetBundle
         $pathMatcher = new PathMatcher();
 
         $this->publishOptions = [
-            'filter' => $pathMatcher->only(
-                '**filepond-plugin-file-validate-type.min.js',
-            ),
+            'filter' => $pathMatcher->only('**filepond-plugin-file-validate-type.min.js'),
         ];
     }
 }

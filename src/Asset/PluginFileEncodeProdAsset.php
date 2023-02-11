@@ -22,9 +22,7 @@ final class PluginFileEncodeProdAsset extends AssetBundle
         $pathMatcher = new PathMatcher();
 
         $this->publishOptions = [
-            'filter' => $pathMatcher->only(
-                '**dist/filepond-plugin-file-encode.min.js',
-            ),
+            'filter' => $pathMatcher->only('**filepond-plugin-file-encode.min.js'),
         ];
     }
 }

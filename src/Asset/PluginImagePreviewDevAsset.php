@@ -23,10 +23,7 @@ final class PluginImagePreviewDevAsset extends AssetBundle
         $pathMatcher = new PathMatcher();
 
         $this->publishOptions = [
-            'filter' => $pathMatcher->only(
-                '**dist/filepond-plugin-image-preview.css',
-                '**dist/filepond-plugin-image-preview.js',
-            ),
+            'filter' => $pathMatcher->only('**filepond-plugin-image-preview.css', '**filepond-plugin-image-preview.js'),
         ];
     }
 }

@@ -22,9 +22,7 @@ final class PluginFileValidateSizeDevAsset extends AssetBundle
         $pathMatcher = new PathMatcher();
 
         $this->publishOptions = [
-            'filter' => $pathMatcher->only(
-                '**dist/filepond-plugin-file-validate-size.js',
-            ),
+            'filter' => $pathMatcher->only('**filepond-plugin-file-validate-size.js'),
         ];
     }
 }

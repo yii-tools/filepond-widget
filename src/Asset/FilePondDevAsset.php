@@ -30,10 +30,7 @@ final class FilePondDevAsset extends AssetBundle
         $pathMatcher = new PathMatcher();
 
         $this->publishOptions = [
-            'filter' => $pathMatcher->only(
-                '**dist/filepond.css',
-                '**dist/filepond.js',
-            ),
+            'filter' => $pathMatcher->only('**filepond.css', '**filepond.js'),
         ];
     }
 }

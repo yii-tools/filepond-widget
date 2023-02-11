@@ -24,8 +24,8 @@ final class PluginPdfPreviewProdAsset extends AssetBundle
 
         $this->publishOptions = [
             'filter' => $pathMatcher->only(
-                '**dist/filepond-plugin-pdf-preview.min.css',
-                '**dist/filepond-plugin-pdf-preview.min.js',
+                '**filepond-plugin-pdf-preview.min.css',
+                '**filepond-plugin-pdf-preview.min.js',
             ),
         ];
     }

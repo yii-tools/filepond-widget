@@ -22,9 +22,7 @@ final class PluginImageCropProdAsset extends AssetBundle
         $pathMatcher = new PathMatcher();
 
         $this->publishOptions = [
-            'filter' => $pathMatcher->only(
-                '**dist/filepond-plugin-image-crop.min.js',
-            ),
+            'filter' => $pathMatcher->only('**filepond-plugin-image-crop.min.js'),
         ];
     }
 }

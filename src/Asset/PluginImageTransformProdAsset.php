@@ -22,9 +22,7 @@ final class PluginImageTransformProdAsset extends AssetBundle
         $pathMatcher = new PathMatcher();
 
         $this->publishOptions = [
-            'filter' => $pathMatcher->only(
-                '**dist/filepond-plugin-image-transform.min.js',
-            ),
+            'filter' => $pathMatcher->only('**filepond-plugin-image-transform.min.js'),
         ];
     }
 }

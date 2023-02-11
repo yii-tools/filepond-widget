@@ -22,9 +22,7 @@ final class PluginImageExifOrientationDevAsset extends AssetBundle
         $pathMatcher = new PathMatcher();
 
         $this->publishOptions = [
-            'filter' => $pathMatcher->only(
-                '**dist/filepond-plugin-image-exif-orientation.js',
-            ),
+            'filter' => $pathMatcher->only('**filepond-plugin-image-exif-orientation.js'),
         ];
     }
 }

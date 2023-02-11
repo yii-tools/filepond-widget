@@ -317,7 +317,7 @@ final class FilePond extends AbstractComponentWidget
     /**
      * @return string the generated input tag.
      */
-    public function renderInputFile(): string
+    private function renderInputFile(): string
     {
         $attributes = $this->attributes;
 
