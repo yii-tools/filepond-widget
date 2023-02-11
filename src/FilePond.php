@@ -8,7 +8,7 @@ use InvalidArgumentException;
 use Yii\FormModel\FormModelInterface;
 use Yii\Html\Helper\CssClass;
 use Yii\Html\Helper\Utils;
-use Yii\Widget\Component\AbstractComponentWidget;
+use Yii\Widget\AbstractComponentWidget;
 use Yiisoft\Assets\AssetManager;
 use Yiisoft\Definitions\Exception\CircularReferenceException;
 use Yiisoft\Definitions\Exception\InvalidConfigException;
