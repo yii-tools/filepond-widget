@@ -12,7 +12,7 @@ final class CdnAssetTest extends TestCase
     use TestTrait;
 
     /**
-     * @dataProvider \Yii\FilePond\Tests\Provider\CdnAssetProvider::assetBundles()
+     * @dataProvider \Yii\FilePond\Tests\Provider\CdnAssetProvider::assetBundles
      */
     public function testAssetRegister(string $type, string $cdnBundle, string $cdnDepend = null): void
     {

@@ -12,7 +12,7 @@ final class NpmAssetTest extends TestCase
     use TestTrait;
 
     /**
-     * @dataProvider \Yii\FilePond\Tests\Provider\NpmAssetProvider::assetBundles()
+     * @dataProvider \Yii\FilePond\Tests\Provider\NpmAssetProvider::assetBundles
      *
      * @throws InvalidConfigException
      *
