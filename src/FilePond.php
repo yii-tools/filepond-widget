@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Yii\FilePond;
 
 use InvalidArgumentException;
+use JsonException;
 use Yii\FormModel\FormModelInterface;
 use Yii\Html\Helper\CssClass;
 use Yii\Html\Helper\Utils;
@@ -92,7 +93,7 @@ final class FilePond extends AbstractWidget
     private TranslatorInterface|null $translator = null;
     private Webview|null $webView = null;
 
-    public function __construct(private FormModelInterface $formModel, private string $attribute)
+    public function __construct(private readonly FormModelInterface $formModel, private readonly string $attribute)
     {
     }
 
@@ -272,10 +273,8 @@ final class FilePond extends AbstractWidget
 
     /**
      * Return new instance wheather is required or not.
-     *
-     * @param bool $value Wheather is required or not. Default: `false`.
      */
-    public function required(): static
+    public function required(): self
     {
         $new = clone $this;
         $new->options['required'] = true;
@@ -286,7 +285,7 @@ final class FilePond extends AbstractWidget
     /**
      * Returns a new instance specifying the translator instance.
      *
-     * @param TranlatorInterface $value The translator instance.
+     * @param TranslatorInterface $value The translator instance.
      */
     public function translator(TranslatorInterface $value): self
     {
@@ -309,6 +308,9 @@ final class FilePond extends AbstractWidget
         return $new;
     }
 
+    /**
+     * @throws JsonException
+     */
     protected function beforeRun(): bool
     {
         if ($this->assetManager === null) {
@@ -351,32 +353,35 @@ final class FilePond extends AbstractWidget
         $translator = $this->translator;
 
         if ($this->locale !== '') {
-            $translator = $translator->withLocale($this->locale);
+            $translator = $translator?->withLocale($this->locale);
         }
 
         foreach ($this->translationTagDefault as $tag) {
             if (array_key_exists($tag, $this->options) === false) {
-                $translation[$tag] = $translator->translate($tag, [], $this->translationCategory);
+                $translation[$tag] = $translator?->translate($tag, [], $this->translationCategory);
             }
         }
 
         return $translation;
     }
 
+    /**
+     * @throws JsonException
+     */
     private function getScript(): string
     {
         $closure = $this->fileValidateTypeDetectType;
         $id = Utils::generateInputId($this->formModel->getFormName(), $this->attribute);
         $options = array_merge($this->options, $this->buildTranslation());
         $pluginConfig = implode(', ', $this->pluginDefault);
-        $setOptions = json_encode($options);
+        $setOptions = json_encode($options, JSON_THROW_ON_ERROR);
 
         return <<<JS
-		FilePond.registerPlugin($pluginConfig);
-		FilePond.setOptions($setOptions);
+		FilePond.registerPlugin($pluginConfig)
+		FilePond.setOptions($setOptions)
 		FilePond.create(document.querySelector('input[type="file"][id="$id"]'), {
 			$closure
-		});
+		})
 		JS;
     }
 
