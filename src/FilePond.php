@@ -8,17 +8,15 @@ use InvalidArgumentException;
 use Yii\FormModel\FormModelInterface;
 use Yii\Html\Helper\CssClass;
 use Yii\Html\Helper\Utils;
-use Yii\Widget\AbstractComponentWidget;
+use Yii\Widget\AbstractWidget;
+use Yii\Widget\Attribute;
 use Yiisoft\Assets\AssetManager;
-use Yiisoft\Definitions\Exception\CircularReferenceException;
-use Yiisoft\Definitions\Exception\InvalidConfigException;
-use Yiisoft\Definitions\Exception\NotInstantiableException;
-use Yiisoft\Factory\NotFoundException;
 use Yiisoft\Translator\TranslatorInterface;
 use Yiisoft\View\WebView;
 
-final class FilePond extends AbstractComponentWidget
+final class FilePond extends AbstractWidget
 {
+    use Attribute\HasName;
     use Concern\HasPluginFileValidateSize;
     use Concern\HasPluginFileValidateType;
     use Concern\HasPluginImageCrop;
@@ -27,6 +25,7 @@ final class FilePond extends AbstractComponentWidget
     use Concern\HasPluginImageTransform;
     use Concern\HasPluginPdfPreview;
 
+    private AssetManager|null $assetManager = null;
     private string $environmentAsset = 'Prod';
     private string $locale = '';
     private array $options = [];
@@ -90,14 +89,11 @@ final class FilePond extends AbstractComponentWidget
         'imageValidateSizeLabelExpectedMinResolution',
         'imageValidateSizeLabelExpectedMaxResolution',
     ];
+    private TranslatorInterface|null $translator = null;
+    private Webview|null $webView = null;
 
-    public function __construct(
-        private FormModelInterface $formModel,
-        private string $attribute,
-        private readonly AssetManager $assetManager,
-        private readonly Webview $webView,
-        private readonly TranslatorInterface $translator
-    ) {
+    public function __construct(private FormModelInterface $formModel, private string $attribute)
+    {
     }
 
     /**
@@ -109,6 +105,19 @@ final class FilePond extends AbstractComponentWidget
     {
         $new = clone $this;
         $new->options['allowMultiple'] = $value;
+
+        return $new;
+    }
+
+    /**
+     * Returns a new instance with the specified asset manager instance.
+     *
+     * @param AssetManager $assetManager The asset manager instance.
+     */
+    public function assetManager(AssetManager $assetManager): self
+    {
+        $new = clone $this;
+        $new->assetManager = $assetManager;
 
         return $new;
     }
@@ -275,18 +284,64 @@ final class FilePond extends AbstractComponentWidget
     }
 
     /**
-     * @throws InvalidConfigException
-     * @throws NotFoundException
-     * @throws NotInstantiableException
-     * @throws CircularReferenceException
-     * @throws \Yiisoft\Assets\Exception\InvalidConfigException
+     * Returns a new instance specifying the translator instance.
+     *
+     * @param TranlatorInterface $value The translator instance.
      */
-    public function render(): string
+    public function translator(TranslatorInterface $value): self
     {
-        $className = 'filepond';
+        $new = clone $this;
+        $new->translator = $value;
 
-        $this->registerAssets();
+        return $new;
+    }
 
+    /**
+     * Returns a new instance specifying the webview instance.
+     *
+     * @param webView $value The webview instance.
+     */
+    public function webView(webView $value): self
+    {
+        $new = clone $this;
+        $new->webView = $value;
+
+        return $new;
+    }
+
+    protected function beforeRun(): bool
+    {
+        if ($this->assetManager === null) {
+            throw new InvalidArgumentException('The `assetManager()` property must be set.');
+        }
+
+        if ($this->translator === null) {
+            throw new InvalidArgumentException('The `translator()` property must be set.');
+        }
+
+        if ($this->webView === null) {
+            throw new InvalidArgumentException('The `webView()` property must be set.');
+        }
+
+        $depends = [];
+
+        foreach ($this->pluginDefault as $plugin) {
+            $assetBundle = str_replace('FilePond', '', $plugin);
+            $depends[] = 'Yii\FilePond\Asset' . '\\' . $assetBundle . $this->environmentAsset . 'Asset';
+        }
+
+        $this->assetManager->registerCustomized(
+            'Yii\FilePond\Asset\FilePond' . $this->environmentAsset . 'Asset',
+            ['depends' => $depends],
+        );
+
+        $this->webView->registerJs($this->getScript());
+
+        return parent::beforeRun();
+    }
+
+    protected function run(): string
+    {
         return $this->renderInputFile();
     }
 
@@ -347,26 +402,5 @@ final class FilePond extends AbstractComponentWidget
         CssClass::add($attributes, 'filepond');
 
         return File::widget([$this->formModel, $this->attribute])->attributes($attributes)->render();
-    }
-
-    /**
-     * @throws \Yiisoft\Assets\Exception\InvalidConfigException
-     */
-    private function registerAssets(): void
-    {
-        $assetManager = $this->assetManager;
-        $depends = [];
-
-        foreach ($this->pluginDefault as $plugin) {
-            $assetBundle = str_replace('FilePond', '', $plugin);
-            $depends[] = 'Yii\FilePond\Asset' . '\\' . $assetBundle . $this->environmentAsset . 'Asset';
-        }
-
-        $assetManager->registerCustomized(
-            'Yii\FilePond\Asset\FilePond' . $this->environmentAsset . 'Asset',
-            ['depends' => $depends],
-        );
-
-        $this->webView->registerJs($this->getScript());
     }
 }
