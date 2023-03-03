@@ -9,10 +9,6 @@ use PHPUnit\Framework\TestCase;
 use Yii\FilePond\FilePond;
 use Yii\FilePond\Tests\Support\TestForm;
 use Yii\FilePond\Tests\Support\TestTrait;
-use Yiisoft\Definitions\Exception\CircularReferenceException;
-use Yiisoft\Definitions\Exception\InvalidConfigException;
-use Yiisoft\Definitions\Exception\NotInstantiableException;
-use Yiisoft\Factory\NotFoundException;
 
 /**
  * @psalm-suppress PropertyNotSetInConstructor
@@ -21,12 +17,42 @@ final class ExceptionTest extends TestCase
 {
     use TestTrait;
 
-    /**
-     * @throws CircularReferenceException
-     * @throws InvalidConfigException
-     * @throws NotFoundException
-     * @throws NotInstantiableException
-     */
+    public function testAssetManager(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('The `assetManager()` property must be set.');
+
+        FilePond::widget([new TestForm(), 'string'])
+            ->attributes(['value' => 1])
+            ->translator($this->translator)
+            ->webView($this->webView)
+            ->render();
+    }
+
+    public function testTranslator(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('The `translator()` property must be set.');
+
+        FilePond::widget([new TestForm(), 'string'])
+            ->assetManager($this->assetManager)
+            ->attributes(['value' => 1])
+            ->webView($this->webView)
+            ->render();
+    }
+
+    public function testWebView(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('The `webView()` property must be set.');
+
+        FilePond::widget([new TestForm(), 'string'])
+            ->assetManager($this->assetManager)
+            ->attributes(['value' => 1])
+            ->translator($this->translator)
+            ->render();
+    }
+
     public function testEnvironmentAsset(): void
     {
         $this->expectException(InvalidArgumentException::class);
