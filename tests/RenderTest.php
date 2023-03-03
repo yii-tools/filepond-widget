@@ -10,10 +10,6 @@ use Yii\FilePond\FilePond;
 use Yii\FilePond\Tests\Support\TestForm;
 use Yii\FilePond\Tests\Support\TestTrait;
 use Yii\Support\Assert;
-use Yiisoft\Definitions\Exception\CircularReferenceException;
-use Yiisoft\Definitions\Exception\InvalidConfigException;
-use Yiisoft\Definitions\Exception\NotInstantiableException;
-use Yiisoft\Factory\NotFoundException;
 
 /**
  * @psalm-suppress PropertyNotSetInConstructor
@@ -22,32 +18,28 @@ final class RenderTest extends TestCase
 {
     use TestTrait;
 
-    /**
-     * @throws CircularReferenceException
-     * @throws InvalidConfigException
-     * @throws NotFoundException
-     * @throws NotInstantiableException
-     * @throws \Yiisoft\Assets\Exception\InvalidConfigException
-     */
     public function testAllowMultiple(): void
     {
         $this->assertSame(
             '<input class="filepond" id="testform-string" name="TestForm[string][]" type="file" multiple>',
-            FilePond::widget([new TestForm(), 'string'])->allowMultiple(true)->render(),
+            FilePond::widget([new TestForm(), 'string'])
+                ->assetManager($this->assetManager)
+                ->allowMultiple(true)
+                ->translator($this->translator)
+                ->webView($this->webView)
+                ->render(),
         );
         $this->assertStringContainsString('"allowMultiple":true', $this->getScript());
     }
 
-    /**
-     * @throws CircularReferenceException
-     * @throws InvalidConfigException
-     * @throws NotFoundException
-     * @throws NotInstantiableException
-     * @throws \Yiisoft\Assets\Exception\InvalidConfigException
-     */
     public function testCanBePluginImageCrop(): void
     {
-        FilePond::widget([new TestForm(), 'string'])->canBePluginImageCrop()->render();
+        FilePond::widget([new TestForm(), 'string'])
+            ->assetManager($this->assetManager)
+            ->canBePluginImageCrop()
+            ->translator($this->translator)
+            ->webView($this->webView)
+            ->render();
 
         $this->assertStringContainsString('FilePondPluginFileEncode', $this->getScript());
         $this->assertStringContainsString('FilePondPluginFileValidateSize', $this->getScript());
@@ -57,16 +49,14 @@ final class RenderTest extends TestCase
         $this->assertStringContainsString('FilePondPluginImageCrop', $this->getScript());
     }
 
-    /**
-     * @throws CircularReferenceException
-     * @throws InvalidConfigException
-     * @throws NotFoundException
-     * @throws NotInstantiableException
-     * @throws \Yiisoft\Assets\Exception\InvalidConfigException
-     */
     public function testCanBePluginImageTransform(): void
     {
-        FilePond::widget([new TestForm(), 'string'])->canBePluginImageTransform()->render();
+        FilePond::widget([new TestForm(), 'string'])
+            ->assetManager($this->assetManager)
+            ->canBePluginImageTransform()
+            ->translator($this->translator)
+            ->webView($this->webView)
+            ->render();
 
         $this->assertStringContainsString('FilePondPluginFileEncode', $this->getScript());
         $this->assertStringContainsString('FilePondPluginFileValidateSize', $this->getScript());
@@ -76,16 +66,14 @@ final class RenderTest extends TestCase
         $this->assertStringContainsString('FilePondPluginImageTransform', $this->getScript());
     }
 
-    /**
-     * @throws CircularReferenceException
-     * @throws InvalidConfigException
-     * @throws NotFoundException
-     * @throws NotInstantiableException
-     * @throws \Yiisoft\Assets\Exception\InvalidConfigException
-     */
     public function testCanBePluginPdfPreview(): void
     {
-        FilePond::widget([new TestForm(), 'string'])->canBePluginPdfPreview()->render();
+        FilePond::widget([new TestForm(), 'string'])
+            ->assetManager($this->assetManager)
+            ->canBePluginPdfPreview()
+            ->translator($this->translator)
+            ->webView($this->webView)
+            ->render();
 
         $this->assertStringContainsString('FilePondPluginFileEncode', $this->getScript());
         $this->assertStringContainsString('FilePondPluginFileValidateSize', $this->getScript());
@@ -95,35 +83,28 @@ final class RenderTest extends TestCase
         $this->assertStringContainsString('FilePondPluginPdfPreview', $this->getScript());
     }
 
-    /**
-     * @throws CircularReferenceException
-     * @throws InvalidConfigException
-     * @throws NotFoundException
-     * @throws NotInstantiableException
-     * @throws \Yiisoft\Assets\Exception\InvalidConfigException
-     */
     public function testClassName(): void
     {
-        FilePond::widget([new TestForm(), 'string'])->className('TestClass')->render();
+        FilePond::widget([new TestForm(), 'string'])
+            ->assetManager($this->assetManager)
+            ->className('TestClass')
+            ->translator($this->translator)
+            ->webView($this->webView)
+            ->render();
 
         $this->assertStringContainsString('"className":"TestClass"', $this->getScript());
     }
 
-    /**
-     * @throws CircularReferenceException
-     * @throws InvalidConfigException
-     * @throws JsonException
-     * @throws NotFoundException
-     * @throws NotInstantiableException
-     * @throws \Yiisoft\Assets\Exception\InvalidConfigException
-     */
     public function testEnvironmentAssetWithCdn(): void
     {
         FilePond::widget([new TestForm(), 'string'])
+            ->assetManager($this->assetManager)
             ->canBePluginImageCrop()
             ->canBePluginImageTransform()
             ->canBePluginPdfPreview()
             ->environmentAsset('Cdn')
+            ->translator($this->translator)
+            ->webView($this->webView)
             ->render();
 
         $this->assertTrue($this->assetManager->isRegisteredBundle(Asset\FilePondCdnAsset::class));
@@ -137,21 +118,16 @@ final class RenderTest extends TestCase
         $this->assertTrue($this->assetManager->isRegisteredBundle(Asset\PluginPdfPreviewCdnAsset::class));
     }
 
-    /**
-     * @throws CircularReferenceException
-     * @throws InvalidConfigException
-     * @throws JsonException
-     * @throws NotFoundException
-     * @throws NotInstantiableException
-     * @throws \Yiisoft\Assets\Exception\InvalidConfigException
-     */
     public function testEnvironmentAssetWithDev(): void
     {
         FilePond::widget([new TestForm(), 'string'])
+            ->assetManager($this->assetManager)
             ->canBePluginImageCrop()
             ->canBePluginImageTransform()
             ->canBePluginPdfPreview()
             ->environmentAsset('Dev')
+            ->translator($this->translator)
+            ->webView($this->webView)
             ->render();
 
         $this->assertTrue($this->assetManager->isRegisteredBundle(Asset\FilePondDevAsset::class));
@@ -165,17 +141,13 @@ final class RenderTest extends TestCase
         $this->assertTrue($this->assetManager->isRegisteredBundle(Asset\PluginPdfPreviewDevAsset::class));
     }
 
-    /**
-     * @throws CircularReferenceException
-     * @throws InvalidConfigException
-     * @throws NotFoundException
-     * @throws NotInstantiableException
-     * @throws \Yiisoft\Assets\Exception\InvalidConfigException
-     */
     public function testLabelIdle(): void
     {
         FilePond::widget([new TestForm(), 'string'])
+            ->assetManager($this->assetManager)
             ->labelIdle('Drag & Drop or <span class="filepond--label-action"> Browse </span>')
+            ->translator($this->translator)
+            ->webView($this->webView)
             ->render();
 
         $this->assertStringContainsString(
@@ -184,15 +156,14 @@ final class RenderTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException
-     * @throws InvalidConfigException
-     * @throws NotFoundException
-     * @throws NotInstantiableException
-     */
     public function testLocale(): void
     {
-        FilePond::widget([new TestForm(), 'string'])->locale('es')->render();
+        FilePond::widget([new TestForm(), 'string'])
+            ->assetManager($this->assetManager)
+            ->locale('es')
+            ->translator($this->translator)
+            ->webView($this->webView)
+            ->render();
 
         $this->assertStringContainsString(
             '"labelIdle":"Arrastra y suelta tus archivos o <span class = \"filepond--label-action\"> Examinar <span>"',
@@ -200,64 +171,51 @@ final class RenderTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException
-     * @throws InvalidConfigException
-     * @throws NotFoundException
-     * @throws NotInstantiableException
-     * @throws \Yiisoft\Assets\Exception\InvalidConfigException
-     */
     public function testMaxFiles(): void
     {
-        FilePond::widget([new TestForm(), 'string'])->maxFiles(3)->render();
+        FilePond::widget([new TestForm(), 'string'])
+            ->assetManager($this->assetManager)
+            ->maxFiles(3)
+            ->translator($this->translator)
+            ->webView($this->webView)
+            ->render();
 
         $this->assertStringContainsString('"maxFiles":3', $this->getScript());
     }
 
-    /**
-     * @throws CircularReferenceException
-     * @throws InvalidConfigException
-     * @throws NotFoundException
-     * @throws NotInstantiableException
-     * @throws \Yiisoft\Assets\Exception\InvalidConfigException
-     */
     public function testName(): void
     {
         $this->assertSame(
             '<input class="filepond" id="testform-string" name="test-name[]" type="file">',
-            FilePond::widget([new TestForm(), 'string'])->name('test-name')->render(),
+            FilePond::widget([new TestForm(), 'string'])
+                ->assetManager($this->assetManager)
+                ->name('test-name')
+                ->translator($this->translator)
+                ->webView($this->webView)
+                ->render(),
         );
     }
 
-    /**
-     * @throws CircularReferenceException
-     * @throws InvalidConfigException
-     * @throws NotFoundException
-     * @throws NotInstantiableException
-     * @throws \Yiisoft\Assets\Exception\InvalidConfigException
-     */
     public function testOptions(): void
     {
         FilePond::widget([new TestForm(), 'string'])
-            ->options([
-                'forceRevert' => true,
-                'storeAsFile' => true,
-            ])
+            ->assetManager($this->assetManager)
+            ->options(['forceRevert' => true, 'storeAsFile' => true])
+            ->translator($this->translator)
+            ->webView($this->webView)
             ->render();
 
         $this->assertStringContainsString('"forceRevert":true,"storeAsFile":true', $this->getScript());
     }
 
-    /**
-     * @throws CircularReferenceException
-     * @throws InvalidConfigException
-     * @throws NotFoundException
-     * @throws NotInstantiableException
-     * @throws \Yiisoft\Assets\Exception\InvalidConfigException
-     */
     public function testPluingDefault(): void
     {
-        FilePond::widget([new TestForm(), 'string'])->canBePluginPdfPreview()->render();
+        FilePond::widget([new TestForm(), 'string'])
+            ->assetManager($this->assetManager)
+            ->canBePluginPdfPreview()
+            ->translator($this->translator)
+            ->webView($this->webView)
+            ->render();
 
         $this->assertStringContainsString('FilePondPluginFileEncode', $this->getScript());
         $this->assertStringContainsString('FilePondPluginFileValidateSize', $this->getScript());
@@ -266,21 +224,17 @@ final class RenderTest extends TestCase
         $this->assertStringContainsString('FilePondPluginImagePreview', $this->getScript());
     }
 
-    /**
-     * @throws CircularReferenceException
-     * @throws InvalidConfigException
-     * @throws NotFoundException
-     * @throws NotInstantiableException
-     * @throws \Yiisoft\Assets\Exception\InvalidConfigException
-     */
     public function testRender(): void
     {
         $this->assertSame(
             '<input class="filepond" id="testform-string" name="TestForm[string][]" type="file">',
             FilePond::widget([new TestForm(), 'string'])
+                ->assetManager($this->assetManager)
                 ->canBePluginImageCrop()
                 ->canBePluginImageTransform()
                 ->canBePluginPdfPreview()
+                ->translator($this->translator)
+                ->webView($this->webView)
                 ->render(),
         );
         $this->assertTrue($this->assetManager->isRegisteredBundle(Asset\FilePondProdAsset::class));
@@ -294,32 +248,27 @@ final class RenderTest extends TestCase
         $this->assertTrue($this->assetManager->isRegisteredBundle(Asset\PluginPdfPreviewProdAsset::class));
     }
 
-    /**
-     * @throws CircularReferenceException
-     * @throws InvalidConfigException
-     * @throws NotFoundException
-     * @throws NotInstantiableException
-     * @throws \Yiisoft\Assets\Exception\InvalidConfigException
-     */
     public function testRequired(): void
     {
         $this->assertSame(
             '<input class="filepond" id="testform-string" name="TestForm[string][]" type="file" required>',
-            FilePond::widget([new TestForm(), 'string'])->required()->render(),
+            FilePond::widget([new TestForm(), 'string'])
+                ->assetManager($this->assetManager)
+                ->required()
+                ->translator($this->translator)
+                ->webView($this->webView)
+                ->render(),
         );
         $this->assertStringContainsString('"required":true', $this->getScript());
     }
 
-    /**
-     * @throws CircularReferenceException
-     * @throws InvalidConfigException
-     * @throws NotFoundException
-     * @throws NotInstantiableException
-     * @throws \Yiisoft\Assets\Exception\InvalidConfigException
-     */
     public function testTranslation(): void
     {
-        FilePond::widget([new TestForm(), 'string'])->render();
+        FilePond::widget([new TestForm(), 'string'])
+            ->assetManager($this->assetManager)
+            ->translator($this->translator)
+            ->webView($this->webView)
+            ->render();
 
         $script = $this->getScript();
 
@@ -362,14 +311,14 @@ final class RenderTest extends TestCase
         $this->assertStringContainsString('imageValidateSizeLabelExpectedMaxResolution', $script);
     }
 
-    /**
-     * @psalm-suppress MixedMethodCall
-     */
     private function getScript(): string
     {
         $script = '';
 
-        /** @psalm-var string[][] $getAllJs */
+        /**
+         * @psalm-var string[][] $getAllJs
+         * @psalm-suppress MixedMethodCall
+         */
         $getAllJs = Assert::inaccessibleProperty($this->webView, 'state')->getJS();
 
         foreach ($getAllJs as $js) {

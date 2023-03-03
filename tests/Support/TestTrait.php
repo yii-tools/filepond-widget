@@ -10,7 +10,6 @@ use Yiisoft\Assets\AssetLoader;
 use Yiisoft\Assets\AssetManager;
 use Yiisoft\Assets\AssetPublisher;
 use Yiisoft\Definitions\Exception\InvalidConfigException;
-use Yiisoft\Test\Support\Container\SimpleContainer;
 use Yiisoft\Test\Support\EventDispatcher\SimpleEventDispatcher;
 use Yiisoft\Translator\CategorySource;
 use Yiisoft\Translator\IntlMessageFormatter;
@@ -18,7 +17,6 @@ use Yiisoft\Translator\Message\Php\MessageSource;
 use Yiisoft\Translator\Translator;
 use Yiisoft\Translator\TranslatorInterface;
 use Yiisoft\View\WebView;
-use Yiisoft\Widget\WidgetFactory;
 
 trait TestTrait
 {
@@ -26,6 +24,7 @@ trait TestTrait
     private Aliases $aliases;
     private AssetManager $assetManager;
     private WebView $webView;
+    private TranslatorInterface $translator;
 
     /**
      * @throws InvalidConfigException
@@ -45,18 +44,9 @@ trait TestTrait
         );
         $this->assetManager = new AssetManager($this->aliases, new AssetLoader($this->aliases, false, []));
         $this->assetPublisher = new AssetPublisher($this->aliases);
-        $this->webView = new WebView(dirname(__DIR__) . '/runtime', new SimpleEventDispatcher());
         $this->assetManager = $this->assetManager->withPublisher($this->assetPublisher);
-
-        $container = new SimpleContainer(
-            [
-                AssetManager::class => $this->assetManager,
-                TranslatorInterface::class => $this->createTranslator(),
-                WebView::class => $this->webView,
-            ],
-        );
-
-        WidgetFactory::initialize($container);
+        $this->webView = new WebView(dirname(__DIR__) . '/runtime', new SimpleEventDispatcher());
+        $this->translator = $this->createTranslator();
     }
 
     protected function tearDown(): void

@@ -22,10 +22,7 @@ final class File extends AbstractInputWidget
     use Attribute\CanBeMultiple;
     use Attribute\HasAccept;
 
-    /**
-     * @return string the generated input tag.
-     */
-    public function render(): string
+    protected function run(): string
     {
         $attributes = $this->attributes;
 
@@ -41,6 +38,6 @@ final class File extends AbstractInputWidget
         // input type="file" not supported value attribute.
         unset($attributes['value']);
 
-        return $this->run('input', '', 'file', $attributes);
+        return $this->renderInput('input', '', 'file', $attributes);
     }
 }

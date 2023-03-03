@@ -36,6 +36,9 @@ final class FilePondHelper
         return self::procesedFile($files, $path);
     }
 
+    /**
+     * @throws JsonException
+     */
     private static function procesedFile(array $files, string $path): array
     {
         $savedFiles = [];
@@ -44,7 +47,7 @@ final class FilePondHelper
         foreach ($files as $file) {
             if (is_string($file) && $file !== '') {
                 /** @psalm-var object|false|null $file */
-                $file = json_decode($file, false, flags: JSON_THROW_ON_ERROR);
+                $file = json_decode($file, false, 512, JSON_THROW_ON_ERROR);
             }
 
             if (is_object($file) && is_string($file->data) && is_string($file->name)) {
@@ -81,7 +84,7 @@ final class FilePondHelper
 
     private static function sanitizeFilenamePart(string $str): string
     {
-        return preg_replace("/[^a-zA-Z0-9\_\s]/", '', $str);
+        return preg_replace("/[^a-zA-Z0-9\s]/", '', $str);
     }
 
     private static function writeFile(string $path, string $data, string $filename): bool

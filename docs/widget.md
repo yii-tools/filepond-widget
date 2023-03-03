@@ -1,10 +1,34 @@
-## Usage widget
+# FilePond widget
 
 The widget is a wrapper for the [filepond](https://pqina.nl/filepond/), which allows you to upload files to the server. 
 
 The assets are registered in the view automatically when the widget is used.
 
-The widget translation is done automatically if you use [locale](https://github.com/yiisoft/yii-middleware/blob/master/src/Locale.php) middleware, otherwise you need to setter locale in the widget `FilePond::widget([$form, 'attachment'])->locale('en')`.
+The widget translation is done automatically if you use [locale](https://github.com/yiisoft/yii-middleware/blob/master/src/Locale.php) middleware, otherwise you need to setter locale in the widget `FilePond::widget([$form, 'attachment'])->locale('en')`. You must set the `assetManager` component `Yiisoft\Assets\AssetManager::class`, `view` component `Yiisoft\View\WebView::class` and `translator` component `Yiisoft\Translator\TranslatorInterface::class`.
+
+**Info:** *Must set in the view the `assetManager` component `Yiisoft\Assets\AssetManager::class` and  `translator` component `Yiisoft\Translator\TranslatorInterface:class` in common params config file.*
+
+## Example config params
+
+```php
+<?php
+
+declare(strict_types=1);
+
+use Yiisoft\Assets\AssetManager;
+use Yiisoft\Definitions\Reference;
+use Yiisoft\Translator\TranslatorInterface;
+
+return [
+    // View
+    'yiisoft/view' => [
+        'parameters' => [
+            'assetManager' => Reference::to(AssetManager::class),
+    	    'translator' => Reference::to(TranslatorInterface::class),
+        ],
+    ],
+];
+```
 
 ### Example of usage simple in the view
 
@@ -14,15 +38,24 @@ The widget translation is done automatically if you use [locale](https://github.
 declare(strict_types=1);
 
 use Yii\FilePond\FilePond;
+
+/**
+ * @var \Yiisoft\Assets\AssetManager $assetManager
+ * @var \Yiisoft\Translator\TranslatorInterface $translator
+ * @var \Yiisoft\View\WebView $this
+ */ 
 ?>
 
 <?= FilePond::widget([$form, 'attachment'])
     ->acceptedFileTypes(['image/*'])
     ->allowMultiple(true)
+    ->assetManager($assetManager)
     ->imagePreviewMarkupShow(false)
     ->imagePreviewTransparencyIndicator('#FFFFFF')
     ->maxFiles(3)
     ->maxFileSize('10MB')
+    ->translator($translator)
+    ->webView($this),
 ?>
 ```
 
@@ -35,6 +68,12 @@ declare(strict_types=1);
 
 use Yii\FilePond\FilePond;
 use Yii\Forms\Component\Field;
+
+/**
+ * @var \Yiisoft\Assets\AssetManager $assetManager
+ * @var \Yiisoft\Translator\TranslatorInterface $translator
+ * @var \Yiisoft\View\WebView $this
+ */ 
 ?>
 
 <?= Field::widget(
@@ -42,10 +81,13 @@ use Yii\Forms\Component\Field;
         FilePond::widget([$form, 'attachment'])
             ->acceptedFileTypes(['image/*'])
             ->allowMultiple(true)
+            ->assetManager($assetManager)
             ->imagePreviewMarkupShow(false)
             ->imagePreviewTransparencyIndicator('#FFFFFF')
             ->maxFiles(3)
-            ->maxFileSize('10MB'),
+            ->maxFileSize('10MB')
+            ->translator($translator)
+            ->webView($this),
     ],
 )->notLabel() ?>
 ```
@@ -177,6 +219,7 @@ All methods are available on the widget instance.
 Method                    | Description                                                               | Default
 --------------------------|---------------------------------------------------------------------------|---------
 `allowMultiple()`         | Return new instance with enable or disable multiple file upload.          | `true`
+`assetManager()`          | Return new instance with the asset manager.                               | `null`
 `canBePluginImageCrop()`  | Return new instance wheather enable or disable plugin image crop.         | `''`
 `canBePluginPdfPreview()` | Return new instance wheather enable or disable plugin PDF preview.        | `''`
 `className()`             | Return new instance with the class name of the FilePond.                  | `null`
@@ -186,6 +229,8 @@ Method                    | Description                                         
 `options()`               | Return new instance with set config options for FilePond.                 | `[]`
 `pluginDefault()`         | Return new instance with the default plugin.                              | see more below
 `required()`              | Return new instance with enable or disable required.                      | `false`
+`translator()`            | Return new instance with the translator.                                  | `null`
+`webView()`               | Return new instance with the web view.                                    | `null`
 
 
 #### Plugin default
