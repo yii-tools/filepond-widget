@@ -27,7 +27,7 @@ composer require yii-tools/filepond-widget
 
 ## Usage widget
 
-For use read the [docs](/docs/widget.md).
+[Check the documentation docs](/docs/widget.md) to learn about usage.
 
 ## Checking dependencies
 
