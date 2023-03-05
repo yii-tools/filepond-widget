@@ -8,7 +8,7 @@ use Yiisoft\Assets\AssetBundle;
 use Yiisoft\Files\PathMatcher\PathMatcher;
 
 /**
- * Production asset bundle for the Filepond plugin file encode.
+ * Production asset bundle for the Filepond plugin file encoding.
  */
 final class PluginFileEncodeProdAsset extends AssetBundle
 {

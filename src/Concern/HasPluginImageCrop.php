@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace Yii\FilePond\Concern;
 
 /**
- * HasPluginImageCrop provides methods for managing the plugin image crop.
+ * Provides methods for managing the plugin image crop.
  */
 trait HasPluginImageCrop
 {
     /**
-     * Return new instance with enable or disable image crop.
+     * Return new instance with enabled or disable image crop.
      *
      * @param bool $value Enable or disable image crop. Default: `true`.
      */
@@ -23,7 +23,7 @@ trait HasPluginImageCrop
     }
 
     /**
-     * Return new instance with the aspect ratio of the crop in human readable format, for example '1:1' or '16:10'.
+     * Return new instance with the aspect ratio of the crop in human-readable format, for example, '1:1' or '16:10'.
      *
      * @param string $value The aspect ratio of the crop. Default: `null`.
      */

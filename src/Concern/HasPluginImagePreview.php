@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace Yii\FilePond\Concern;
 
 /**
- * HasPluginImageExifOrientation provides methods for managing the plugin image exif orientation.
+ * Provides methods for managing the plugin image exif orientation.
  */
 trait HasPluginImagePreview
 {
     /**
-     * Return new instance with enable or disable image preview.
+     * Return new instance with enabled or disable image preview.
      *
      * @param bool $value Enable or disable image preview. Default: `true`.
      */
@@ -23,10 +23,13 @@ trait HasPluginImagePreview
     }
 
     /**
-     * Return new instance with a new image preview filter. Use to filter file items before generating the preview,
-     * useful to filter certain image types or names if we do not wish to generate a preview. Receives a file item as
-     * the first argument. Return false to skip generating an image preview. (item) => !/svg/.test(item.fileType) will
-     * skip generating previews for SVGs.
+     * Return new instance with a new image preview filter.
+     *
+     * Use filter file items before generating the preview, useful to filter certain image types or names if we don't
+     * wish to generate a preview.
+     *
+     * Receives a file item as the first argument. Return false to skip generating an image preview.
+     * (item) => !/svg/.test(item.fileType) will skip generating previews for SVGs.
      *
      * @param string $value The image preview filter. Default: `(fileItem) => true`.
      */
@@ -39,8 +42,9 @@ trait HasPluginImagePreview
     }
 
     /**
-     * Return new instance with a new image preview height. Fixed image preview height, overrides min and max preview
-     * height
+     * Return new instance with new image preview height.
+     *
+     * Fixed image preview height, overrides min and max preview height
      *
      * @param int $value The image preview height. Default: `null`.
      */
@@ -67,7 +71,7 @@ trait HasPluginImagePreview
     }
 
     /**
-     * Return new instance wheater enable or disable image preview markup.
+     * Return new instance wheaten enables or disables image preview markup.
      *
      * @param bool $value Enable or disable image preview markup. Default: `true`.
      */
@@ -81,7 +85,7 @@ trait HasPluginImagePreview
 
     /**
      * Return new instance with image preview max file size. Can be used to prevent loading of large images when
-     * createImageBitmap is not supported. By default no maximum file size is defined, expects a string, like `2MB`
+     * createImageBitmap isn't supported. By default, no maximum file size is defined, expects a string, like `2MB`
      * or `500KB`.
      *
      * @param string $value The image preview max file size. Default: `null`.
@@ -123,7 +127,7 @@ trait HasPluginImagePreview
     }
 
     /**
-     * Return new instance with a new image preview min height.
+     * Return new instance with new image preview min height.
      *
      * @param int $value The image preview height. Default: `44`.
      */
@@ -137,8 +141,11 @@ trait HasPluginImagePreview
 
     /**
      * Return new instance with transparency grid behind the image, set to a color value (for example '#f00') to set
-     * transparent image background color. Please note that this is only for preview purposes, the background color or
-     * grid is not embedded in the output image.
+     * transparent image background color.
+     *
+     * Please note that this is only for preview purposes.
+     *
+     * The background color or grid isn't embedded in the output image.
      *
      * @param string $value The image preview transparency indicator. Default: `null`.
      */

@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace Yii\FilePond\Concern;
 
 /**
- * HasPluginImageExifOrientation provides methods for managing the plugin image exif orientation.
+ * Provides methods for managing the plugin image exif orientation.
  */
 trait HasPluginImageTransform
 {
     /**
-     * Return new instance with enable or disable image transform.
+     * Return new instance with enabled or disable image transform.
      *
      * @param bool $value Enable or disable image transform. Default: `true`.
      */
@@ -52,7 +52,9 @@ trait HasPluginImageTransform
 
     /**
      * Return new instance with image transform canvas memory limit. A memory limit to make sure the canvas can be used
-     * correctly when rendering the image. By default this is only active on iOS.
+     * correctly when rendering the image.
+     *
+     * By default, this is only active on iOS.
      *
      * @param int $value Image transform canvas memory limit. Default: `isBrowser && isIOS ? 4096 * 4096 : null`.
      */
@@ -66,7 +68,7 @@ trait HasPluginImageTransform
 
     /**
      * Return new instance with image transform client transform. An array of transforms to apply on the client, useful
-     * if we, for instance, want to do resizing on the client but cropping on the server. null means apply all
+     * if we, for instance, want to do resizing on the client but cropping on the server. Null means apply all
      * transforms ('resize', 'crop').
      *
      * @param array $value Image transform client transform. Default: `null`.
@@ -80,9 +82,13 @@ trait HasPluginImageTransform
     }
 
     /**
-     * Return new instance with image transform output quality. The quality of the output image supplied as a value
-     * between `0` and `100`. Where `100` is best quality and `0` is worst. When not supplied it will use the browser
-     * default quality which averages around `94`.
+     * Return new instance with image transform output quality.
+     *
+     * The quality of the output image supplied as a value between `0` and `100`.
+     *
+     * Where `100` is the best quality and `0` is worst.
+     *
+     * When not supplied, it will use the browser default quality, which averages around `94`.
      *
      * @param int $value Image transform output quality. Default: `null`.
      */
@@ -98,7 +104,7 @@ trait HasPluginImageTransform
      * Return new instance with image transform output quality mode. Should output quality be enforced, set the
      * 'optional' to only apply when a transform is required due to other requirements (e.g. resize or crop).
      *
-     * @param string $value Image transform output quality mode. Default: 'always'.
+     * @param string $value Image transforms an output quality mode. Default: 'always'.
      */
     public function imageTransformOutputQualityMode(string $value): self
     {
@@ -110,7 +116,7 @@ trait HasPluginImageTransform
 
     /**
      * Return new instance with image transform output strip image head. Should JPEG EXIF data be stripped from the
-     * output image, defaults to true (as that is what the browser does), set to false to copy over the EXIF data from
+     * output image, defaults to true (as that's what the browser does), set too false to copy over the EXIF data from
      * the original image to the output image. This will automatically remove the EXIF orientation tag to prevent
      * orientation problems.
      *
@@ -125,8 +131,9 @@ trait HasPluginImageTransform
     }
 
     /**
-     * Return new instance with image transform variants. An object that can be used to output multiple different files
-     * based on different transfom instructions.
+     * Return new instance with image transform variants.
+     *
+     * An object that can be used to output many files based on different transform instructions.
      *
      * @param array $value Image transform variants. Default: `null`.
      */
