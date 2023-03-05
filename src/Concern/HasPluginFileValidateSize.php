@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace Yii\FilePond\Concern;
 
 /**
- * HasPluginFileValidateSize provides methods for managing the file validate size plugin.
+ * Provides methods for managing the file validate size plugin.
  */
 trait HasPluginFileValidateSize
 {
     /**
-     * Return new instance with enable or disable file size validation.
+     * Return new instance with enabled or disable file size validation.
      *
      * @param bool $value Enable or disable file size validation. Default: `true`.
      */

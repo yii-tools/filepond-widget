@@ -5,14 +5,14 @@ declare(strict_types=1);
 namespace Yii\FilePond\Concern;
 
 /**
- * HasPluginFileValidateType provides methods for managing the file validate type plugin.
+ * Provides methods for managing the file validate type plugin.
  */
 trait HasPluginFileValidateType
 {
     private string $fileValidateTypeDetectType = '';
 
     /**
-     * Return new instance with enable or disable file type validation.
+     * Return new instance with enabled or disable file type validation.
      *
      * @param bool $value Enable or disable file type validation. Default: `true`.
      */
@@ -26,7 +26,7 @@ trait HasPluginFileValidateType
 
     /**
      * Return new instance with accepted file types. Can be mime types or wild cards.
-     * For instance ['image/*'] will accept all images. ['image/png', 'image/jpeg'] will only accepts PNGs and JPEGs.
+     * For instance ['image/*'] will accept all images. ['image/png', 'image/jpeg'] will only accept PNGs and JPEGs.
      *
      * @param array $value Accepted file types. Default: `[]`.
      */
@@ -39,8 +39,8 @@ trait HasPluginFileValidateType
     }
 
     /**
-     * Return new instance specifies function that receives a file and the type detected by FilePond, should return a
-     * Promise, resolve with detected file type, reject if can't detect.
+     * Return new instance specifies a function that receives a file, and the type detected by FilePond, should return a
+     * Promise, resolve with a detected file type, reject if you can't detect.
      *
      * @param string $value Specifies function that receives a file and the type detected by FilePond. Default: `null`.
      *
@@ -66,8 +66,9 @@ trait HasPluginFileValidateType
     }
 
     /**
-     * Return new instance with message shown to indicate the allowed file types. Available placeholders are {allTypes},
-     * {allButLastType}, {lastType}.
+     * Return a new instance with a message shown to indicate the allowed file types.
+     *
+     * Available placeholders are {allTypes}, {allButLastType}, {lastType}.
      *
      * @param string $value Message shown to indicate the allowed file types.
      * Default: 'Expects {allButLastType} or {lastType}'.
@@ -95,9 +96,9 @@ trait HasPluginFileValidateType
     }
 
     /**
-     * Return new instance with label for file type not allowed error.
+     * Return new instance with label for a file type not allowed error.
      *
-     * @param string $value Label for file type not allowed error. Default: `File type not allowed`.
+     * @param string $value Label for file type didn't allow error. Default: `File type not allowed`.
      */
     public function labelFileTypeNotAllowed(string $value): self
     {

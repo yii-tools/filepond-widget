@@ -17,6 +17,7 @@ use Yiisoft\View\WebView;
 
 final class FilePond extends AbstractWidget
 {
+    use Attribute\HasAttributes;
     use Attribute\HasName;
     use Concern\HasPluginFileValidateSize;
     use Concern\HasPluginFileValidateType;
@@ -26,6 +27,7 @@ final class FilePond extends AbstractWidget
     use Concern\HasPluginImageTransform;
     use Concern\HasPluginPdfPreview;
 
+    private array $attributes = [];
     private AssetManager|null $assetManager = null;
     private string $environmentAsset = 'Prod';
     private string $locale = '';
@@ -98,9 +100,9 @@ final class FilePond extends AbstractWidget
     }
 
     /**
-     * Return new instance with enable or disable multiple file upload.
+     * Return new instance with enable or disable many file uploads.
      *
-     * @param bool $value Enable or disable multiple file upload. Default: `true`.
+     * @param bool $value Enable or disable many file upload. Default: `true`.
      */
     public function allowMultiple(bool $value): self
     {
@@ -124,7 +126,7 @@ final class FilePond extends AbstractWidget
     }
 
     /**
-     * Return new instance wheather enable or disable plugin image crop.
+     * Return new instance whether enable or disable plugin image crop.
      */
     public function canBePluginImageCrop(): self
     {
@@ -135,7 +137,7 @@ final class FilePond extends AbstractWidget
     }
 
     /**
-     * Return new instance wheather enable or disable plugin image transform.
+     * Return new instance whether enable or disable plugin image transform.
      */
     public function canBePluginImageTransform(): self
     {
@@ -146,7 +148,7 @@ final class FilePond extends AbstractWidget
     }
 
     /**
-     * Return new instance wheather enable or disable plugin PDF preview.
+     * Return new instance whether enable or disable plugin PDF preview.
      */
     public function canBePluginPdfPreview(): self
     {
@@ -187,7 +189,7 @@ final class FilePond extends AbstractWidget
     }
 
     /**
-     * Return new instance with number of files to load and display in the list.
+     * Return new instance with a number of files to load and display in the list.
      *
      * @param int $value The number of files to load and display in the list. Default: `null`.
      */
@@ -215,9 +217,9 @@ final class FilePond extends AbstractWidget
     }
 
     /**
-     * Return new instance with the locale lenguage of FilePond.
+     * Return new instance with the locale language of FilePond.
      *
-     * @param string $value The locale lenguage of FilePond. Default: ``.
+     * @param string $value The locale language of FilePond. Default: ``.
      */
     public function locale(string $value): self
     {
@@ -272,7 +274,7 @@ final class FilePond extends AbstractWidget
     }
 
     /**
-     * Return new instance wheather is required or not.
+     * Return new instance whether is required or not.
      */
     public function required(): self
     {

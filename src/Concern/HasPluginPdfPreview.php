@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace Yii\FilePond\Concern;
 
 /**
- * HasPluginPdfPreview provides methods for managing the plugin pdf preview.
+ * Provides methods for managing the plugin pdf preview.
  */
 trait HasPluginPdfPreview
 {
     /**
-     * Return new instance with enable or disable pdf preview.
+     * Return new instance with enabled or disable pdf preview.
      *
      * @param bool $value Enable or disable pdf preview. Default: `true`.
      */
@@ -36,9 +36,9 @@ trait HasPluginPdfPreview
     }
 
     /**
-     * Return new instance with pdf component extra params.
+     * Return new instance with pdf part extra params.
      *
-     * @param string $value Pdf component extra params. Default: `'toolbar=0&view=fit&page=1'`.
+     * @param string $value Pdf part extra params. Default: `'toolbar=0&view=fit&page=1'`.
      */
     public function pdfComponentExtraParams(string $value): self
     {

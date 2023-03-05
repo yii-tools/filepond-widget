@@ -4,9 +4,10 @@ The widget is a wrapper for the [filepond](https://pqina.nl/filepond/), which al
 
 The assets are registered in the view automatically when the widget is used.
 
-The widget translation is done automatically if you use [locale](https://github.com/yiisoft/yii-middleware/blob/master/src/Locale.php) middleware, otherwise you need to setter locale in the widget `FilePond::widget([$form, 'attachment'])->locale('en')`. You must set the `assetManager` component `Yiisoft\Assets\AssetManager::class`, `view` component `Yiisoft\View\WebView::class` and `translator` component `Yiisoft\Translator\TranslatorInterface::class`.
+The widget translation is done automatically if you use [locale](https://github.com/yiisoft/yii-middleware/blob/master/src/Locale.php) middleware,
+otherwise you need to setter locale in the widget `FilePond::widget([$form, 'attachment'])->locale('en')`. You must set the `assetManager` part `Yiisoft\Assets\AssetManager::class`, `view` part `Yiisoft\View\WebView::class` and `translator` part `Yiisoft\Translator\TranslatorInterface::class`.
 
-**Info:** *Must set in the view the `assetManager` component `Yiisoft\Assets\AssetManager::class` and  `translator` component `Yiisoft\Translator\TranslatorInterface:class` in common params config file.*
+**Info:** *Must set in the view the `assetManager` part `Yiisoft\Assets\AssetManager::class` and  `translator` part `Yiisoft\Translator\TranslatorInterface:class` in common params config file.*
 
 ## Example config params
 
@@ -105,7 +106,7 @@ use Yii\Forms\Helper\FilePondHelper;
 use Yii\FormModel\AbstractFormModel;
 
 /**
- * The contact form model is used to collect user input on contact page.
+ * The contact form model is used to collect user input on the contact page.
  */
 final class ContactForm extends AbstractFormModel
 {
@@ -212,26 +213,25 @@ final class ContactAction
 }
 ```
 
-### Methods of the widget
+## Methods of the widget
 
-All methods are available on the widget instance.
+All methods are immutable, which means that they will return a new instance of the widget with the specified option set.
 
-Method                    | Description                                                               | Default
---------------------------|---------------------------------------------------------------------------|---------
-`allowMultiple()`         | Return new instance with enable or disable multiple file upload.          | `true`
-`assetManager()`          | Return new instance with the asset manager.                               | `null`
-`canBePluginImageCrop()`  | Return new instance wheather enable or disable plugin image crop.         | `''`
-`canBePluginPdfPreview()` | Return new instance wheather enable or disable plugin PDF preview.        | `''`
-`className()`             | Return new instance with the class name of the FilePond.                  | `null`
-`environmentAsset()`      | Return new instance with the environment asset. Values allowed: `Cdn`, `Dev`, `Prod`. | `Prod`
-`maxFiles()`              | Return new instance with number of files to load and display in the list. | `null`
-`labelIdle()`             | Return new instance with the label shown to indicate this is a drop area. | `'Drag & Drop your files or <span class="filepond--label-action">Browse</span>'`
-`options()`               | Return new instance with set config options for FilePond.                 | `[]`
-`pluginDefault()`         | Return new instance with the default plugin.                              | see more below
-`required()`              | Return new instance with enable or disable required.                      | `false`
-`translator()`            | Return new instance with the translator.                                  | `null`
-`webView()`               | Return new instance with the web view.                                    | `null`
-
+| Method                    | Description                                                                           | Default                                                                          |
+|---------------------------|---------------------------------------------------------------------------------------|----------------------------------------------------------------------------------|
+| `allowMultiple()`         | Return new instance with enable or disable multiple file upload.                      | `true`                                                                           |
+| `assetManager()`          | Return new instance with the asset manager.                                           | `null`                                                                           |
+| `canBePluginImageCrop()`  | Return new instance whether enable or disable plugin image crop.                      | `''`                                                                             |
+| `canBePluginPdfPreview()` | Return new instance whether enable or disable plugin PDF preview.                     | `''`                                                                             |
+| `className()`             | Return new instance with the class name of the FilePond.                              | `null`                                                                           |
+| `environmentAsset()`      | Return new instance with the environment asset. Values allowed: `Cdn`, `Dev`, `Prod`. | `Prod`                                                                           |
+| `maxFiles()`              | Return new instance with number of files to load and display in the list.             | `null`                                                                           |
+| `labelIdle()`             | Return new instance with the label shown to indicate this is a drop area.             | `'Drag & Drop your files or <span class="filepond--label-action">Browse</span>'` |
+| `options()`               | Return new instance with set config options for FilePond.                             | `[]`                                                                             |
+| `pluginDefault()`         | Return new instance with the default plugin.                                          | see more below                                                                   |
+| `required()`              | Return new instance with enable or disable required.                                  | `false`                                                                          |
+| `translator()`            | Return new instance with the translator.                                              | `null`                                                                           |
+| `webView()`               | Return new instance with the web view.                                                | `null`                                                                           |
 
 #### Plugin default
 

@@ -7,7 +7,7 @@ namespace Yii\FilePond\Asset;
 use Yiisoft\Assets\AssetBundle;
 
 /**
- * Content delivery network asset bundle for the Filepond plugin file encode.
+ * Content delivery network asset bundle for the Filepond plugin file encoding.
  */
 final class PluginFileEncodeCdnAsset extends AssetBundle
 {
